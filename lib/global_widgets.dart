@@ -8,11 +8,9 @@ class MainNavigationBar extends StatefulWidget {
       MainNavigationBarState();
 }
 
-
 class MainNavigationBarState extends State<MainNavigationBar> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -34,6 +32,24 @@ class MainNavigationBarState extends State<MainNavigationBar> {
       ],
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,
+    );
+  }
+}
+
+class AddPhotosButton extends StatelessWidget {
+  const AddPhotosButton({super.key});
+
+  @override
+  Widget build(BuildContext context){
+    return FilledButton.icon(
+      onPressed: () {},
+      icon: const Icon(Icons.add_a_photo_outlined),
+      label: const Text("Add Photos"),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(
+          Theme.of(context).colorScheme.primary
+        ),
+      )
     );
   }
 }
