@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'global_widgets.dart';
 
 //move this to a different file
 class Room {
@@ -46,14 +47,17 @@ class _RoomPageState extends State<RoomPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(room.name),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
+            Container(
               height: 200,
+              width: double.infinity,
+              color: Color.fromARGB(11, 11, 11, 11),
               child: Text("image here")
             ),
+            Divider(),
             Row(
               children: [
                 Text(
@@ -67,100 +71,63 @@ class _RoomPageState extends State<RoomPage> {
                   room.rating.toString(), 
                   style: const TextStyle(
                     fontSize: 26,
+                    //decoration: TextDecoration.underline
                   )
                 ),
               ],
             ),
-            SizedBox(
-              height: 250,
-              child: NestedTabBar(room: room),
-            )
-            
-          ]
-        ),
-    );
-  }
-}
-
-class NestedTabBar extends StatefulWidget {
-  const NestedTabBar({super.key, required this.room});
-
-  final Room room;
-
-  @override
-  State<NestedTabBar> createState() => _NestedTabBarState();
-}
-
-class _NestedTabBarState extends State<NestedTabBar>
-    with TickerProviderStateMixin {
-  late final TabController _tabController;
-  
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-    _tabController.addListener((){
-      print('index: '+ _tabController.index.toString());
-    });
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Room room = widget.room;
-    return Column(
-      children: [
-        SizedBox(
-          height: 50,
-          child: TabBar(
-            controller: _tabController,
-            tabs: const [
-              Tab(text: "Overview"),
-              Tab(text: "Reviews"),
-            ]
-          ),
-        ),
-        SizedBox(
-          height: 200,
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            Divider(),
+            IntrinsicHeight(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  TextButton.icon(
+                    icon: Icon(Icons.location_on),
+                    label: Text("View on Map", style: TextStyle(fontSize: 16, decoration: TextDecoration.underline)),
+                    onPressed: (){} //go to map
+                  ),
+                  const VerticalDivider(width: 20, color: Colors.transparent),
+                  TextButton.icon(
+                    icon: Icon(Icons.star),
+                    label: Text("Reviews (${room.numReviews})", style: TextStyle(fontSize: 16, decoration: TextDecoration.underline)),
+                    onPressed: (){} //go to map
+                  ),
+                ]
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("Statistics:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                   Text(
-                    "Floor: ${room.floor.toString()}",
+                    " Floor: ${room.floor.toString()}",
                     style: const TextStyle(
                       fontSize: 18,
                     )
                   ),
                   Text(
-                    "Capacity: ${room.capacity.toString()}",
+                    " Number of Seats: ${room.capacity.toString()}",
                     style: const TextStyle(
                       fontSize: 18,
                     )
                   ),
                   Text(
-                    "Description: ${room.description.toString()}",
+                    " Description: ${room.description.toString()}",
                     style: const TextStyle(
                       fontSize: 18,
                     )
                   ),
                 ],
               ),
-              const Center(
-                child: Text("It's rainy here"),
-              ),
-            ]
-          ),
+            )
+            
+            
+          ]
         ),
-      ],
+        bottomNavigationBar: MainNavigationBar(),
     );
   }
 }
