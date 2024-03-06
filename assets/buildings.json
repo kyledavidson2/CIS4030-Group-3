@@ -1,0 +1,1022 @@
+{
+  "buildings": [
+    {
+      "name": "Alexander Hall",
+      "abrv": "ALEX",
+      "floors": 3,
+      "rooms": [
+        [
+          {
+            "name": "ALEX 027",
+            "floor": 0,
+            "capacity": 100,
+            "rating": 4.3,
+            "numReviews": 12,
+            "description": ""
+          }
+        ],
+        [
+          {
+            "name": "ALEX 100",
+            "floor": 1,
+            "capacity": 100,
+            "rating": 4.3,
+            "numReviews": 12,
+            "description": ""
+          }
+        ],
+        [
+          {
+            "name": "ALEX 200",
+            "floor": 2,
+            "capacity": 350,
+            "rating": 4.1,
+            "numReviews": 19,
+            "description": ""
+          }
+        ]
+      ]
+    },
+    {
+      "name": "Animal Science & Nutrition",
+      "abrv": "ANNU",
+      "floors": 3,
+      "rooms": [
+        [
+          {
+            "name": "ANNU 102",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 103",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 104",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 105",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 107",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 110",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 115",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 116",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 129",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 130",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 131",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 133",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 141",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 156",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          }
+        ],
+        [
+          {
+            "name": "ANNU 204",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 205",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 208",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 212",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 214",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 215",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 216",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 217",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 218",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 220",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          }
+        ],
+        [
+          {
+            "name": "ANNU 302",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 305",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 306",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 327",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 337",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "ANNU 355",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          }
+        ]
+      ]
+    },
+    {
+      "name": "Crop Science",
+      "abrv": "CRSC",
+      "floors": 4,
+      "rooms": [
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "name": "Food Science",
+      "abrv": "FS",
+      "floors": 2,
+      "rooms": [
+        [],
+        []
+      ]
+    },
+    {
+      "name": "H.L. Hutt",
+      "abrv": "HUTT",
+      "floors": 2,
+      "rooms": [
+        [],
+        []
+      ]
+    },
+    {
+      "name": "Landscape Architecture",
+      "abrv": "LA",
+      "floors": 2,
+      "rooms": [
+        [],
+        []
+      ]
+    },
+    {
+      "name": "Macdonald Hall",
+      "abrv": "MAC",
+      "floors": 1,
+      "rooms": [
+        []
+      ]
+    },
+    {
+      "name": "MacKinnon",
+      "abrv": "MCKN",
+      "floors": 4,
+      "rooms": [
+        [
+          {
+            "name": "MCKN 016",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 018",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 019",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 019A",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 020",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 021",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 024",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 025A",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 025B",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 026",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 026A",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 026B",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 027",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 028",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 029",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 030",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 030B",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 031",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 059",
+            "floor": 0,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          }
+        ],
+        [
+          {
+            "name": "MCKN 101",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 103",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 107",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 108",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 109",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 114",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 115",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 116",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 117",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 118",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 118A",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 119",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 119A",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 120",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 121",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 128",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 129",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 130",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 131",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 132",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 134",
+            "floor": 1,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          }
+        ],
+        [
+          {
+            "name": "MCKN 223",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 224",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 225",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 226",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 227",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 228",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 229",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 230",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 231",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 231A",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 232",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 233",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 234",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 235",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 236",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 237",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 238",
+            "floor": 2,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          }
+        ],
+        [
+          {
+            "name": "MCKN 303",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 304",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 305",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 306",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 307",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 308",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 309",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 310",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 311",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 312",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 313",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 314",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 315",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 316",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 317",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          },
+          {
+            "name": "MCKN 318",
+            "floor": 3,
+            "capacity": 0,
+            "rating": 0,
+            "numReviews": 0,
+            "description": ""
+          }
+        ]
+      ]
+    },
+    {
+      "name": "MacNaughton",
+      "abrv": "MACN",
+      "floors": 4,
+      "rooms": [
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "name": "Macdonald Stewart",
+      "abrv": "MACS",
+      "floors": 1,
+      "rooms": [
+        []
+      ]
+    },
+    {
+      "name": "MacLachlan",
+      "abrv": "MCLN",
+      "floors": 1,
+      "rooms": [
+        []
+      ]
+    },
+    {
+      "name": "Macdonal Institute",
+      "abrv": "MINS",
+      "floors": 4,
+      "rooms": [
+        []
+      ]
+    },
+    {
+      "name": "Rozanski Hall",
+      "abrv": "ROZH",
+      "floors": 1,
+      "rooms": [
+        []
+      ]
+    },
+    {
+      "name": "Summerlee Science Complex",
+      "abrv": "SCI",
+      "floors": 4,
+      "rooms": [
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "name": "Albert A. Thornborough",
+      "abrv": "THRN",
+      "floors": 3,
+      "rooms": [
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "name": "War Memorial Hall",
+      "abrv": "WMEM",
+      "floors": 1,
+      "rooms": [
+        []
+      ]
+    },
+    {
+      "name": "Zavitz Hall",
+      "abrv": "ZAV",
+      "floors": 4,
+      "rooms": [
+        [],
+        [],
+        [],
+        []
+      ]
+    }
+  ]
+}
