@@ -10,7 +10,7 @@ class Item {
     this.isExpanded = false,
   });
 
-  String expandedValue;
+  Widget expandedValue;
   String headerValue;
   bool isExpanded;
 }
@@ -19,7 +19,7 @@ List<Item> generateItems(List<Floor> floors) {
   return List<Item>.generate(floors.length, (int index) {
     return Item(
       headerValue: floors[index].toString(),
-      expandedValue: 'This is item number $index',
+      expandedValue: RoomGrid(floor: floors[index]),
     );
   });
 }
@@ -67,7 +67,7 @@ class _ExpansionPanelListExampleState extends State<ExpansionPanelListExample> {
             );
           },
           body: ListTile(
-              title: Text(item.expandedValue),
+              title: item.expandedValue,
               onTap: () {}
           ),
           isExpanded: item.isExpanded,
@@ -118,6 +118,29 @@ class _BuildingPageState extends State<BuildingPage> {
         ],
       ),
       body: ExpansionPanelListExample(floors: building.floors)
+    );
+  }
+}
+
+class RoomGrid extends StatelessWidget{
+  const RoomGrid({super.key, required this.floor});
+
+  final Floor floor;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      primary: false,
+      shrinkWrap: true,
+      crossAxisCount: 2,
+      childAspectRatio: (1/.3),
+      children: <Widget>[
+        for (Room r in floor.rooms)
+          TextButton(
+            onPressed: () {}, //navigate to RoomPage(r)
+            child: Text(r.name)
+          )
+      ]
     );
   }
 }
