@@ -1,35 +1,6 @@
 import 'package:flutter/material.dart';
 import 'global_widgets.dart';
-
-//move this to a different file
-class Room {
-  Room({
-    required this.name,
-    required this.location,
-    this.latitude,
-    this.longitude,
-    required this.floor,
-    required this.capacity,
-    this.rating = 0,
-    this.numReviews = 0,
-    this.description = "",
-  });
-
-  String name;
-  //Building building;
-  String location;
-  double? latitude;
-  double? longitude;
-  int floor;
-  int capacity;
-  double rating;
-  int numReviews;
-  String description;
-
-  /* Not sure how to implement photos, maybe a list of file paths if they
-  are stored locally. Or something else if they are fetched from a
-  server. */
-}
+import 'classes/room.dart';
 
 class RoomPage extends StatefulWidget {
   const RoomPage({super.key, required this.room});
