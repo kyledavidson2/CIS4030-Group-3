@@ -12,30 +12,18 @@ class ReviewsPage extends StatefulWidget {
 
 class _ReviewsPageState extends State<ReviewsPage> {
   
-  String review = "This is an example of a review that is added by a user. It can include commentary on the room, location, etc.";
+  String review = "This is an example of a review that is added by a user. It can include commentary on the room, location, etc. Helpful hints or suggestions may also be part of a review.";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text("Reviews"),centerTitle: true,),
       body: Column(
         children: [
-        SizedBox(height: 22),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-              onPressed: (){print("Overview");}, 
-              child: Text("Overview")
-            ),
-            ElevatedButton(
-              onPressed: (){print("Reviews");}, 
-              child: Text("Reviews"),
-              style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.blueGrey)),
-            ),
-          ]
-        ),
+        const SizedBox(height: 22),
         Expanded(
           child:ListView.separated(
-            itemCount: 4,
+            itemCount: 8,
             itemBuilder: (BuildContext context, index){
               return UserReview(reviewNumber: index, reviewRating: index, reviewContent: review);
               
@@ -63,36 +51,15 @@ class UserReview extends StatelessWidget{
 
  @override
  Widget build(BuildContext context){
-  return Container(
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          Colors.blue,
-          Colors.black
-        ]
-        )
-    ),
-    child: Column(
-      children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        
-        children: [
-          Text("Review $reviewNumber",style: TextStyle(color: Colors.white)),
-          Text("$reviewRating Stars",style: TextStyle(color: Colors.white)),
-        ]
-      ),
-     RichText(
-            maxLines: 4,
-            text: TextSpan(
-              text: reviewContent
-              ),
-            ),
-    
-    ],
-      )
-  );
+  return ListTile(
+      tileColor: Colors.blueGrey,
+      iconColor: Colors.yellow,
+      leading: const Icon(Icons.reviews),
+      trailing:const Icon(Icons.star_rate),
+      title: Text("Review #$reviewNumber",style: const TextStyle(color: Colors.white),),
+      subtitle: Text(reviewContent, style: const TextStyle(color: Colors.white),),
+      isThreeLine: true,
+      visualDensity: VisualDensity.compact
+    );
  }
 }
