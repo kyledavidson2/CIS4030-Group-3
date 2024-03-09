@@ -98,7 +98,7 @@ class _BuildingPageState extends State<BuildingPage> {
           MenuAnchor(
             menuChildren: [
               MenuItemButton(
-                child: Text("Add a Room"),
+                child: const Text("Add a Room"),
                 onPressed: () {},
               )
             ],
@@ -111,7 +111,7 @@ class _BuildingPageState extends State<BuildingPage> {
                     controller.open();
                   }
                 },
-                icon: Icon(Icons.more_vert),
+                icon: const Icon(Icons.more_vert),
               );
             }
           )
