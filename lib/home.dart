@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'global_widgets.dart';
 
 //Main HomePage for App
 class HomePage extends StatefulWidget {
@@ -42,6 +43,7 @@ class _HomePageState extends State<HomePage> {
           )
           )
       ),
+      bottomNavigationBar: MainNavigationBar(),
     );
   }
 }
