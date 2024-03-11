@@ -57,23 +57,30 @@ class _HomePageState extends State<HomePage> {
           fit: BoxFit.cover,
         ))),
         Padding(
-            padding: EdgeInsets.all(10),
-            child: ListView.builder(
-              itemCount: buildings.length,
-              prototypeItem: ListTile(
-                title: Text("Buildings"),
-              ),
-              itemBuilder: (context, index) {
-                return Padding(padding: EdgeInsets.all(10), child:ListTile(
-                  title: ElevatedButton(
-                      onPressed: ()=>{},
-                      child:
-                      Align(  alignment: Alignment.centerLeft, child: Text(buildings[index].abrv + "-" + buildings[index].name))
-                  ),
-                )
-                );
-              },
-            )
+          padding: EdgeInsets.all(10),
+          child: ListView.builder(
+            itemCount: buildings.length,
+            prototypeItem: ListTile(
+              title: Text("Buildings"),
+            ),
+            itemBuilder: (context, index) {
+              return Padding(padding: EdgeInsets.all(10), child:ListTile(
+                title: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BuildingPage(building: buildings[index])
+                      ),
+                    );
+                  },
+                  child:
+                  Align(  alignment: Alignment.centerLeft, child: Text(buildings[index].abrv + "-" + buildings[index].name))
+                ),
+              )
+              );
+            },
+          )
         )
       ][_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
