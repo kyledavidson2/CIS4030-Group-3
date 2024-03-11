@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:group3_4030/classes/floor.dart';
 import 'package:group3_4030/room_page.dart';
 import 'classes/building.dart';
 import 'classes/room.dart';
@@ -18,7 +19,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  final List<Building> buildings = [Building(name: "Alexander Hall", abrv: "ALEX", floors: []),Building(name: "Animal Science", abrv: "ANNU", floors: []),];
+  final List<Building> buildings = [
+    Building(name: "Alexander Hall", abrv: "ALEX", floors: []),
+    Building(name: "Animal Science", abrv: "ANNU", floors: []),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -64,17 +68,19 @@ class _HomePageState extends State<HomePage> {
                 title: Text("Buildings"),
               ),
               itemBuilder: (context, index) {
-                return Padding(padding: EdgeInsets.all(10), child:ListTile(
-                  title: ElevatedButton(
-                      onPressed: ()=>{},
-                      child:
-                      Align(  alignment: Alignment.centerLeft, child: Text(buildings[index].abrv + "-" + buildings[index].name))
-                  ),
-                )
-                );
+                return Padding(
+                    padding: EdgeInsets.all(10),
+                    child: ListTile(
+                      title: ElevatedButton(
+                          onPressed: () => {},
+                          child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(buildings[index].abrv +
+                                  "-" +
+                                  buildings[index].name))),
+                    ));
               },
-            )
-        )
+            ))
       ][_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -126,16 +132,17 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => RoomPage(room:
-                  Room(
-                    name: "Room Name",
-                    floor: 20,
-                    capacity: 20,
-                    rating: 1,
-                    numReviews: 0,
-                    description: "asdf",
-                  )
-                    ,)),
+                  MaterialPageRoute(
+                      builder: (context) => RoomPage(
+                            room: Room(
+                              name: "Room Name",
+                              floor: 20,
+                              capacity: 20,
+                              rating: 1,
+                              numReviews: 0,
+                              description: "asdf",
+                            ),
+                          )),
                 );
               },
               child: const ListTile(
@@ -152,6 +159,29 @@ class _HomePageState extends State<HomePage> {
               child: const ListTile(
                 leading: Icon(Icons.list_alt),
                 title: Text("Reviews Page"),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BuildingPage(
+                          building: Building(
+                              name: "test building",
+                              abrv: "err",
+                              floors: [Floor(level: 1, rooms: [Room(
+                                name: "Room Name",
+                                floor: 20,
+                                capacity: 20,
+                                rating: 1,
+                                numReviews: 0,
+                                description: "asdf",
+                              )])]))),
+                );
+              },
+              child: const ListTile(
+                leading: Icon(Icons.list_alt),
+                title: Text("Building Page"),
               )),
         ]),
       ),
