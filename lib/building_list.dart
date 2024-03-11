@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'global_widgets.dart';
 import 'classes/building.dart';
+import 'building_page.dart';
 
 //Main HomePage for App
 class BuildingList extends StatefulWidget {
@@ -45,7 +46,12 @@ class _BuildingList extends State<BuildingList> {
             itemBuilder: (context, index) {
               return Padding(padding: EdgeInsets.all(10), child:ListTile(
                 title: ElevatedButton(
-                    onPressed: ()=>{},
+                    onPressed: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => BuildingPage(building: buildings[index])),
+                      )
+                    },
                     child:
                         Align(  alignment: Alignment.centerLeft, child: Text(buildings[index].abrv + "-" + buildings[index].name))
                 ),
