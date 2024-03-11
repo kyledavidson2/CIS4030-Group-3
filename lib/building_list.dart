@@ -19,12 +19,12 @@ class _BuildingList extends State<BuildingList> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         //Marker for the map
-        leading: IconButton(
-          icon: const Icon(Icons.map),
-          onPressed: () {
-            print("Marker clicked!");
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.map),
+        //   onPressed: () {
+        //     print("Marker clicked!");
+        //   },
+        // ),
         //Profile for User
         actions: [
           IconButton(

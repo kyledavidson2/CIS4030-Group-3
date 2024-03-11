@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:group3_4030/reviews.dart';
 import 'global_widgets.dart';
 import 'classes/room.dart';
 
@@ -61,7 +62,12 @@ class _RoomPageState extends State<RoomPage> {
                   TextButton.icon(
                     icon: Icon(Icons.star),
                     label: Text("Reviews (${room.numReviews})", style: TextStyle(fontSize: 16, decoration: TextDecoration.underline)),
-                    onPressed: (){} //go to map
+                    onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ReviewsPage()),
+                      );
+                    } //go to map
                   ),
                 ]
               ),

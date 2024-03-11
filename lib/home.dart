@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:group3_4030/room_page.dart';
+import 'classes/building.dart';
+import 'classes/room.dart';
 import 'global_widgets.dart';
+import 'add_room.dart';
+import 'building_list.dart';
+import 'building_page.dart';
+import 'reviews.dart';
 
 //Main HomePage for App
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-  
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  
+  int _selectedIndex = 0;
+  final List<Building> buildings = [Building(name: "Alexander Hall", abrv: "ALEX", floors: []),Building(name: "Animal Science", abrv: "ANNU", floors: []),];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +32,12 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         //Marker for the map
-        leading: IconButton(
-          icon: Icon(Icons.map),
-          onPressed: () {
-            print("Marker clicked!");
-          },
-          ),
+        // leading: IconButton(
+        //   icon: Icon(Icons.map),
+        //   onPressed: () {
+        //     print("Marker clicked!");
+        //   },
+        // ),
         //Profile for User
         actions: [
           IconButton(
@@ -34,16 +48,113 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Container(
-        //Image Placeholder for Maps
-        decoration:BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/map.png"),
-              fit: BoxFit.cover,
-          )
-          )
+      body: <Widget>[
+        Container(
+            //Image Placeholder for Maps
+            decoration: BoxDecoration(
+                image: DecorationImage(
+          image: AssetImage("assets/map.png"),
+          fit: BoxFit.cover,
+        ))),
+        Padding(
+            padding: EdgeInsets.all(10),
+            child: ListView.builder(
+              itemCount: buildings.length,
+              prototypeItem: ListTile(
+                title: Text("Buildings"),
+              ),
+              itemBuilder: (context, index) {
+                return Padding(padding: EdgeInsets.all(10), child:ListTile(
+                  title: ElevatedButton(
+                      onPressed: ()=>{},
+                      child:
+                      Align(  alignment: Alignment.centerLeft, child: Text(buildings[index].abrv + "-" + buildings[index].name))
+                  ),
+                )
+                );
+              },
+            )
+        )
+      ][_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Map',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'List',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
-      bottomNavigationBar: MainNavigationBar(),
+      drawer: Drawer(
+        child: ListView(padding: EdgeInsets.zero, children: [
+          const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Recipe App',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddRoom()),
+                );
+              },
+              child: const ListTile(
+                leading: Icon(Icons.list_alt),
+                title: Text("Add Room"),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BuildingList()),
+                );
+              },
+              child: const ListTile(
+                leading: Icon(Icons.list_alt),
+                title: Text("Building List"),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RoomPage(room:
+                  Room(
+                    name: "Room Name",
+                    floor: 20,
+                    capacity: 20,
+                    rating: 1,
+                    numReviews: 0,
+                    description: "asdf",
+                  )
+                    ,)),
+                );
+              },
+              child: const ListTile(
+                leading: Icon(Icons.list_alt),
+                title: Text("Room Page"),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReviewsPage()),
+                );
+              },
+              child: const ListTile(
+                leading: Icon(Icons.list_alt),
+                title: Text("Reviews Page"),
+              )),
+        ]),
+      ),
     );
   }
 }
