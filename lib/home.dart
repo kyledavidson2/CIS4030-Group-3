@@ -6,7 +6,6 @@ import 'classes/building.dart';
 import 'classes/room.dart';
 import 'global_widgets.dart';
 import 'add_room.dart';
-import 'building_list.dart';
 import 'building_page.dart';
 import 'reviews.dart';
 import 'classes/all_state.dart';

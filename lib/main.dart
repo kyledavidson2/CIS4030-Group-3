@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'global_widgets.dart';
 import 'add_room.dart';
-import 'building_list.dart';
 import 'home.dart';
 import 'classes/all_state.dart';
 void main() {
