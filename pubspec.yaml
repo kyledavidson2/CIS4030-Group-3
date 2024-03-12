@@ -64,6 +64,7 @@ flutter:
   assets:
     - assets/map.png
     - assets/buildings.json
+    - assets/mins300.jpg
 
 
 
