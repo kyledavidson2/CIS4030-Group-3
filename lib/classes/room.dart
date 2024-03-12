@@ -1,3 +1,7 @@
+
+
+
+
 class Room {
   String name = "";
   int floor = 0;
@@ -20,12 +24,23 @@ class Room {
   });
 
   Room.fromJson(Map<String, dynamic> json) {
+
     name = json['name'];
     floor = json['floor'];
     capacity = json['capacity'];
-    rating = json['rating'];
+    if (json.containsKey('rating')){
+      print(json['name'].toString());
+      if(json['rating'] is int){
+        rating = json['rating'].toDouble();
+      }
+      else{
+        rating = json['rating'];
+      }
+
+    }
     numReviews = json['numReviews'];
     description = json['description'];
+
   }
 
 }
