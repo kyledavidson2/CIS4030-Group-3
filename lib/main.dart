@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'global_widgets.dart';
 import 'add_room.dart';
 import 'building_list.dart';
 import 'home.dart';
+import 'classes/all_state.dart';
 void main() {
-  runApp(const MyApp());
+  runApp(
+      ChangeNotifierProvider(
+          create: (context) => AllStates(),
+          child: const MaterialApp(
+            home: MyApp(),
+          )
+      ) );
 }
 
 class MyApp extends StatelessWidget {
@@ -119,42 +127,42 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      drawer: Drawer(
-        child: ListView(padding: EdgeInsets.zero, children: [
-          const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Recipe App',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              )),
-          GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AddRoom()),
-                );
-              },
-              child: const ListTile(
-                leading: Icon(Icons.list_alt),
-                title: Text("Add Room"),
-              )),
-          GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => BuildingList()),
-                );
-              },
-              child: const ListTile(
-                leading: Icon(Icons.list_alt),
-                title: Text("Building List"),
-              )),
-        ]),
-      ),
+      // drawer: Drawer(
+      //   child: ListView(padding: EdgeInsets.zero, children: [
+      //     const DrawerHeader(
+      //         decoration: BoxDecoration(
+      //           color: Colors.blue,
+      //         ),
+      //         child: Text(
+      //           'Recipe App',
+      //           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+      //         )),
+      //     GestureDetector(
+      //         onTap: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(
+      //                 builder: (context) => AddRoom()),
+      //           );
+      //         },
+      //         child: const ListTile(
+      //           leading: Icon(Icons.list_alt),
+      //           title: Text("Add Room"),
+      //         )),
+      //     GestureDetector(
+      //         onTap: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(
+      //                 builder: (context) => BuildingList()),
+      //           );
+      //         },
+      //         child: const ListTile(
+      //           leading: Icon(Icons.list_alt),
+      //           title: Text("Building List"),
+      //         )),
+      //   ]),
+      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',

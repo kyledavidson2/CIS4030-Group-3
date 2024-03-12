@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:group3_4030/add_room.dart';
+import 'package:group3_4030/room_page.dart';
 import 'classes/room.dart';
 import 'classes/building.dart';
 import 'classes/floor.dart';
@@ -99,7 +101,16 @@ class _BuildingPageState extends State<BuildingPage> {
             menuChildren: [
               MenuItemButton(
                 child: const Text("Add a Room"),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            AddRoom(
+                              building: building,
+                            )),
+                  );
+                },
               )
             ],
             builder: (BuildContext context, MenuController controller, Widget? child) {
@@ -137,7 +148,16 @@ class RoomGrid extends StatelessWidget{
       children: <Widget>[
         for (Room r in floor.rooms)
           TextButton(
-            onPressed: () {}, //navigate to RoomPage(r)
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        RoomPage(
+                          room: r,
+                        )),
+              );
+            }, //navigate to RoomPage(r)
             child: Text(r.name)
           )
       ]

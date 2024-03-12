@@ -35,10 +35,14 @@ class AddReview extends StatelessWidget{
             ],
           ),
           AddPhotosButton(),
+          ElevatedButton(onPressed: ()=>{
+            Navigator.of(context).pop()
+
+          }, child: Text("Submit"))
 
         ],
       ),
-      bottomNavigationBar: MainNavigationBar(),
+      // bottomNavigationBar: MainNavigationBar(),
     );
   }
 }

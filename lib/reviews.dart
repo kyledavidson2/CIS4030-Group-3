@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:group3_4030/add_review.dart';
 
 //create JSON
 
@@ -36,7 +37,13 @@ class _ReviewsPageState extends State<ReviewsPage> {
         ]
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: (){print("Add Review");},
+          onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddReview()),
+                      );
+          },
           child: Icon(Icons.add),
           ),
     );
