@@ -8,11 +8,27 @@
           "level": 0,
           "rooms": [
             {
-              "name": "ALEX 027",
+              "name": "ALEX 020",
               "floor": 0,
-              "capacity": 100,
+              "capacity": 35,
               "rating": 4.3,
               "numReviews": 12,
+              "description": ""
+            },
+            {
+              "name": "ALEX 024",
+              "floor": 0,
+              "capacity": 35,
+              "rating": 4.3,
+              "numReviews": 12,
+              "description": ""
+            },
+            {
+              "name": "ALEX 028",
+              "floor": 0,
+              "capacity": 30,
+              "rating": 3.5,
+              "numReviews": 4,
               "description": ""
             }
           ]
@@ -24,6 +40,14 @@
               "name": "ALEX 100",
               "floor": 1,
               "capacity": 100,
+              "rating": 4.3,
+              "numReviews": 12,
+              "description": ""
+            },
+            {
+              "name": "ALEX 117",
+              "floor": 1,
+              "capacity": 60,
               "rating": 4.3,
               "numReviews": 12,
               "description": ""
@@ -39,6 +63,59 @@
               "capacity": 350,
               "rating": 4.1,
               "numReviews": 19,
+              "description": ""
+            },
+            {
+              "name": "ALEX 218",
+              "floor": 2,
+              "capacity": 60,
+              "rating": 4.1,
+              "numReviews": 19,
+              "description": ""
+            },
+            {
+              "name": "ALEX 259",
+              "floor": 2,
+              "capacity": 45,
+              "rating": 4.1,
+              "numReviews": 19,
+              "description": ""
+            },
+            {
+              "name": "ALEX 265",
+              "floor": 2,
+              "capacity": 20,
+              "rating": 4.1,
+              "numReviews": 19,
+              "description": ""
+            },
+            {
+              "name": "ALEX 286",
+              "floor": 2,
+              "capacity": 10,
+              "rating": 4.1,
+              "numReviews": 19,
+              "description": ""
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "rooms": [
+            {
+              "name": "ALEX 309",
+              "floor": 3,
+              "capacity": 30,
+              "rating": 4.3,
+              "numReviews": 12,
+              "description": ""
+            },
+            {
+              "name": "ALEX 380",
+              "floor": 0,
+              "capacity": 10,
+              "rating": 4.3,
+              "numReviews": 12,
               "description": ""
             }
           ]
