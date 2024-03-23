@@ -20,175 +20,232 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  final List<Building> _searchResult = [];
+  TextEditingController controller = TextEditingController();
 
 
   void _onItemTapped(int index) {
+    changeFocus();
     setState(() {
       _selectedIndex = index;
     });
   }
 
+  Widget _buildBuildingsList(List<Building> buildings) {
+    return ListView.builder(
+      itemCount: buildings.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.all(0.0),
+          child: ListTile(
+            title: ElevatedButton(
+              onPressed: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BuildingPage(building:  buildings[index])
+                  ),
+                )
+              },
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text("${buildings[index].abrv} - ${buildings[index].name}")
+              )
+            ),
+          ));
+      }
+    );
+  }
+
+  Widget _buildSearchBox() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: SizedBox(
+          width: 300,
+          height: 20,
+          child: TextField(
+            enableInteractiveSelection: false,
+            controller: controller,
+            decoration: const InputDecoration(
+              hintText: 'Search',
+              icon: Icon(Icons.search),
+            ),
+            onChanged: onSearchTextChanged,
+          ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.person),
-            onPressed: () {
-              print("User clicked!");
-            },
-          ),
-        ],
-      ),
-      body: <Widget>[
-        Container(
-          //Image Placeholder for Maps
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/map.png"),
-                  fit: BoxFit.cover,
-                ))),
-        Padding(
-            padding: EdgeInsets.all(10),
-            child: ListView.builder(
-              itemCount: (Provider.of<AllStates>(context)).buildings.length,
-              prototypeItem: ListTile(
-                title: Text("Buildings"),
-              ),
-              itemBuilder: (context, index) {
-                return Padding(
-                    padding: EdgeInsets.all(10),
-                    child: ListTile(
-                      title: ElevatedButton(
-                          onPressed: () => {
-                          Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                          builder: (context) => BuildingPage(
-                          building:  (Provider.of<AllStates>(context))
-                              .buildings[index])),
-                          )
-                      },
-                          child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text((Provider.of<AllStates>(context))
-                                  .buildings[index].abrv +
-                                  "-" +
-                                  (Provider.of<AllStates>(context))
-                                      .buildings[index].name))),
-                    ));
+    return GestureDetector(
+      onTap: changeFocus,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: _buildSearchBox(),
+          leadingWidth: 300,
+          backgroundColor: Colors.white,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.person),
+              onPressed: () {
+                print("User clicked!");
               },
-            ))
-      ][_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Map',
+            ),
+          ],
+        ),
+        body: <Widget>[
+          Container(
+            //Image Placeholder for Maps
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/map.png"),
+                fit: BoxFit.cover,
+              )
+            )
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'List',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: _searchResult.isNotEmpty || controller.text.isNotEmpty
+              ? _buildBuildingsList(_searchResult)
+              : _buildBuildingsList((Provider.of<AllStates>(context)).buildings)
+          )
+        ][_selectedIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.map),
+              label: 'Map',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.list),
+              label: 'List',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+        ),
+        // drawer: Drawer(
+        //   child: ListView(padding: EdgeInsets.zero, children: [
+        //     const DrawerHeader(
+        //         decoration: BoxDecoration(
+        //           color: Colors.blue,
+        //         ),
+        //         child: Text(
+        //           'Recipe App',
+        //           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        //         )),
+        //     GestureDetector(
+        //         onTap: () {
+        //           Navigator.push(
+        //             context,
+        //             MaterialPageRoute(builder: (context) => AddRoom()),
+        //           );
+        //         },
+        //         child: const ListTile(
+        //           leading: Icon(Icons.list_alt),
+        //           title: Text("Add Room"),
+        //         )),
+        //     GestureDetector(
+        //         onTap: () {
+        //           Navigator.push(
+        //             context,
+        //             MaterialPageRoute(builder: (context) => BuildingList()),
+        //           );
+        //         },
+        //         child: const ListTile(
+        //           leading: Icon(Icons.list_alt),
+        //           title: Text("Building List"),
+        //         )),
+        //     GestureDetector(
+        //         onTap: () {
+        //           Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //                 builder: (context) =>
+        //                     RoomPage(
+        //                       room: Room(
+        //                         name: "ALEX 101",
+        //                         floor: 1,
+        //                         capacity: 20,
+        //                         rating: 3,
+        //                         numReviews: 2,
+        //                         description: "asdf",
+        //                       ),
+        //                     )),
+        //           );
+        //         },
+        //         child: const ListTile(
+        //           leading: Icon(Icons.list_alt),
+        //           title: Text("Room Page"),
+        //         )),
+        //     GestureDetector(
+        //         onTap: () {
+        //           Navigator.push(
+        //             context,
+        //             MaterialPageRoute(builder: (context) => ReviewsPage()),
+        //           );
+        //         },
+        //         child: const ListTile(
+        //           leading: Icon(Icons.list_alt),
+        //           title: Text("Reviews Page"),
+        //         )),
+        //     GestureDetector(
+        //         onTap: () {
+        //           Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //                 builder: (context) =>
+        //                     BuildingPage(
+        //                         building: Building(
+        //                             name: "Building name",
+        //                             abrv: "err",
+        //                             floors: [Floor(level: 1, rooms: [Room(
+        //                               name: "Room Name",
+        //                               floor: 20,
+        //                               capacity: 20,
+        //                               rating: 1,
+        //                               numReviews: 0,
+        //                               description: "asdf",
+        //                             )
+        //                             ])
+        //                             ]))),
+        //           );
+        //         },
+        //         child: const ListTile(
+        //           leading: Icon(Icons.list_alt),
+        //           title: Text("Building Page"),
+        //         )),
+        //   ]),
+        // ),
       ),
-      // drawer: Drawer(
-      //   child: ListView(padding: EdgeInsets.zero, children: [
-      //     const DrawerHeader(
-      //         decoration: BoxDecoration(
-      //           color: Colors.blue,
-      //         ),
-      //         child: Text(
-      //           'Recipe App',
-      //           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-      //         )),
-      //     GestureDetector(
-      //         onTap: () {
-      //           Navigator.push(
-      //             context,
-      //             MaterialPageRoute(builder: (context) => AddRoom()),
-      //           );
-      //         },
-      //         child: const ListTile(
-      //           leading: Icon(Icons.list_alt),
-      //           title: Text("Add Room"),
-      //         )),
-      //     GestureDetector(
-      //         onTap: () {
-      //           Navigator.push(
-      //             context,
-      //             MaterialPageRoute(builder: (context) => BuildingList()),
-      //           );
-      //         },
-      //         child: const ListTile(
-      //           leading: Icon(Icons.list_alt),
-      //           title: Text("Building List"),
-      //         )),
-      //     GestureDetector(
-      //         onTap: () {
-      //           Navigator.push(
-      //             context,
-      //             MaterialPageRoute(
-      //                 builder: (context) =>
-      //                     RoomPage(
-      //                       room: Room(
-      //                         name: "ALEX 101",
-      //                         floor: 1,
-      //                         capacity: 20,
-      //                         rating: 3,
-      //                         numReviews: 2,
-      //                         description: "asdf",
-      //                       ),
-      //                     )),
-      //           );
-      //         },
-      //         child: const ListTile(
-      //           leading: Icon(Icons.list_alt),
-      //           title: Text("Room Page"),
-      //         )),
-      //     GestureDetector(
-      //         onTap: () {
-      //           Navigator.push(
-      //             context,
-      //             MaterialPageRoute(builder: (context) => ReviewsPage()),
-      //           );
-      //         },
-      //         child: const ListTile(
-      //           leading: Icon(Icons.list_alt),
-      //           title: Text("Reviews Page"),
-      //         )),
-      //     GestureDetector(
-      //         onTap: () {
-      //           Navigator.push(
-      //             context,
-      //             MaterialPageRoute(
-      //                 builder: (context) =>
-      //                     BuildingPage(
-      //                         building: Building(
-      //                             name: "Building name",
-      //                             abrv: "err",
-      //                             floors: [Floor(level: 1, rooms: [Room(
-      //                               name: "Room Name",
-      //                               floor: 20,
-      //                               capacity: 20,
-      //                               rating: 1,
-      //                               numReviews: 0,
-      //                               description: "asdf",
-      //                             )
-      //                             ])
-      //                             ]))),
-      //           );
-      //         },
-      //         child: const ListTile(
-      //           leading: Icon(Icons.list_alt),
-      //           title: Text("Building Page"),
-      //         )),
-      //   ]),
-      // ),
     );
+  }
+
+  onSearchTextChanged(String text) async {
+    _searchResult.clear();
+    if (text.isEmpty) {
+      setState(() {});
+      return;
+    }
+
+    (Provider.of<AllStates>(context, listen: false)).buildings.forEach((building) {
+      if (building.name.toLowerCase().contains(text.toLowerCase()) ||
+          building.abrv.toLowerCase().contains(text.toLowerCase())) {
+        _searchResult.add(building);
+      } 
+    });
+
+    setState(() {});
+  }
+
+  void changeFocus(){
+    // This allows closing keyboard when tapping outside of a text field
+    FocusScopeNode currentFocus = FocusScope.of(context);
+
+    if (!currentFocus.hasPrimaryFocus &&
+        currentFocus.focusedChild != null) {
+      FocusManager.instance.primaryFocus!.unfocus();
+    }
   }
 }

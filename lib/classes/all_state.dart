@@ -7,7 +7,7 @@ import 'building.dart';
 class AllStates extends ChangeNotifier {
   List <Building> _buildings = [];
 
-  List get buildings => _buildings;
+  List<Building> get buildings => _buildings;
   DataLoader loader = DataLoader();
 
   AllStates() {
