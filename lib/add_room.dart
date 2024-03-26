@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'classes/all_state.dart';
+import 'dart:convert';
 
 import 'classes/building.dart';
 import 'classes/room.dart';
@@ -27,6 +28,12 @@ class _AddRoomState extends State<AddRoom> {
     Building b = widget.building;
     try {
       int f = int.parse(floorController.text);
+
+      //handle case where there is ground floor or not
+      if (b.firstFloor() != 0){
+        f--;
+      }
+
       b.floors[f].rooms.add(
         Room(
           name: nameController.text,
@@ -35,10 +42,13 @@ class _AddRoomState extends State<AddRoom> {
           description: descController.text,
         )
       );
-      http.Response r = await http.get(
-        Uri.parse('http://35.172.228.146:8000/setbuilding?id=${widget.building.id}&data=${b.toJson()}'));
 
-      (Provider.of<AllStates>(context)).refreshBuildings();
+      print('http://35.172.228.146:8000/setbuilding?id=${widget.building.id}&data=${jsonEncode(b.toJson())}');
+      
+      http.Response r = await http.get(
+        Uri.parse('http://35.172.228.146:8000/setbuilding?id=${widget.building.id}&data=${jsonEncode(b.toJson())}'));
+
+      (Provider.of<AllStates>(context, listen: false)).refreshBuildings();
     } catch (e) {
       print(e);
       return false;
