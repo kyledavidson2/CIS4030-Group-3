@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
           child: ListTile(
             title: ElevatedButton(
               onPressed: () => {
+                print(buildings[index].id),
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -103,9 +104,10 @@ class _HomePageState extends State<HomePage> {
         body: <Widget>[
           Container(
             //Image Placeholder for Maps
-            child: GoogleMap(
-        mapType: MapType.terrain, initialCameraPosition: guelphCampus,
-            ),
+            //child: GoogleMap(
+            //  mapType: MapType.hybrid, initialCameraPosition: guelphCampus,
+            //),
+            child: Text("map not loaded to save requests"),
           ),
           Padding(
             padding: const EdgeInsets.all(4.0),

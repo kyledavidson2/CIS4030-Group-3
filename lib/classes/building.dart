@@ -4,6 +4,9 @@ class Building {
   String name = "";
   String abrv = "";
   List<Floor> floors = [];
+  int id = -1;
+  double lat = 0.0;
+  double long = 0.0;
 
   Building({
     required this.name,
@@ -20,5 +23,8 @@ class Building {
         floors.add(Floor.fromJson(v));
       });
     }
+    id = json['id'];
+    lat = json['lat'];
+    long = json['long'];
   }
 }
