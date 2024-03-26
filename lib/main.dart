@@ -4,6 +4,7 @@ import 'global_widgets.dart';
 import 'add_room.dart';
 import 'home.dart';
 import 'classes/all_state.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 void main() {
   runApp(
       ChangeNotifierProvider(

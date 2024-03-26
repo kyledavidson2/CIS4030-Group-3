@@ -9,6 +9,7 @@ import 'add_room.dart';
 import 'building_page.dart';
 import 'reviews.dart';
 import 'classes/all_state.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 //Main HomePage for App
 class HomePage extends StatefulWidget {
@@ -23,6 +24,11 @@ class _HomePageState extends State<HomePage> {
   final List<Building> _searchResult = [];
   TextEditingController controller = TextEditingController();
 
+  //Setting the Coordinates for the Map to focus on the campus
+  static const CameraPosition guelphCampus = CameraPosition(
+    target: LatLng(43.530950, -80.226416),
+    zoom: 18.1,
+  );
 
   void _onItemTapped(int index) {
     changeFocus();
@@ -97,12 +103,9 @@ class _HomePageState extends State<HomePage> {
         body: <Widget>[
           Container(
             //Image Placeholder for Maps
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/map.png"),
-                fit: BoxFit.cover,
-              )
-            )
+            child: GoogleMap(
+        mapType: MapType.terrain, initialCameraPosition: guelphCampus,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(4.0),

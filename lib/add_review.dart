@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'global_widgets.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class AddReview extends StatelessWidget{
   const AddReview({super.key});
@@ -15,7 +16,18 @@ class AddReview extends StatelessWidget{
           Column(
             children: [
               Center(child: const Text("Choose a rating:")),
-              Icon(Icons.star_rate),
+              RatingBar.builder(
+                initialRating: 2,
+                minRating: 1,
+                direction: Axis.horizontal,
+                itemCount: 5,
+                itemBuilder: (context, index) =>
+                  Icon(Icons.star,
+                  color: Colors.yellow,
+                  ),
+                onRatingUpdate: (value) { print("Rating applied!"); },
+
+              )
             ],
           ),
           Column(
