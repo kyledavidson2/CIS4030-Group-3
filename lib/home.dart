@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
 
   //Testing Markers
 
-  Set<Marker> test = setMarkers();
+  //Set<Marker> test = setMarkers();
   
   //Setting the Coordinates for the Map to focus on the campus
   static const CameraPosition guelphCampus = CameraPosition(
@@ -92,6 +92,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Set<Marker> test = setMarkers();
     return GestureDetector(
       onTap: changeFocus,
       child: Scaffold(
