@@ -10,6 +10,7 @@ import 'building_page.dart';
 import 'reviews.dart';
 import 'classes/all_state.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'classes/marker.dart';
 
 //Main HomePage for App
 class HomePage extends StatefulWidget {
@@ -25,18 +26,10 @@ class _HomePageState extends State<HomePage> {
   TextEditingController controller = TextEditingController();
 
 
-  //Marker for buildings
-  static const Marker buildingMarker1 = Marker(
-     markerId: MarkerId("Alex"),
-     position: LatLng(43.52956814339412, -80.22754587407422)
-    );
 
-    static const Marker buildingMarker2 = Marker(
-     markerId: MarkerId("Thorn"),
-     position: LatLng(43.53047104106505, -80.22464813174554)
-    );
   //Testing Markers
-  Set<Marker> markers = {buildingMarker1,buildingMarker2};
+
+  Set<Marker> test = setMarkers();
   
   //Setting the Coordinates for the Map to focus on the campus
   static const CameraPosition guelphCampus = CameraPosition(
@@ -48,6 +41,7 @@ class _HomePageState extends State<HomePage> {
     changeFocus();
     setState(() {
       _selectedIndex = index;
+      
     });
   }
 
@@ -119,7 +113,7 @@ class _HomePageState extends State<HomePage> {
             //Image Placeholder for Maps
             child: GoogleMap(
                   mapType: MapType.terrain, initialCameraPosition: guelphCampus,
-                  markers: markers,
+                  markers: test,
             ),
           ),
           Padding(
