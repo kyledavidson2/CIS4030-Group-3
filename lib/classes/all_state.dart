@@ -15,6 +15,10 @@ class AllStates extends ChangeNotifier {
     readJson();
   }
 
+  void refreshBuildings(){
+    readJson();
+  }
+
   Future<http.Response> getBuildings(){
     return http.get(Uri.parse('http://35.172.228.146:8000/getbuilding'));
   }

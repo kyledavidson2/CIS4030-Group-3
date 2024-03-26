@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'classes/all_state.dart';
 
 import 'classes/building.dart';
+import 'classes/room.dart';
 import 'global_widgets.dart';
 
 //Main HomePage for App
@@ -14,6 +18,34 @@ class AddRoom extends StatefulWidget {
 }
 
 class _AddRoomState extends State<AddRoom> {
+  final nameController = TextEditingController();
+  final floorController = TextEditingController();
+  final capacityController = TextEditingController();
+  final descController = TextEditingController();
+
+  Future<bool> submit() async{
+    Building b = widget.building;
+    try {
+      int f = int.parse(floorController.text);
+      b.floors[f].rooms.add(
+        Room(
+          name: nameController.text,
+          floor: f,
+          capacity: int.parse(capacityController.text),
+          description: descController.text,
+        )
+      );
+      http.Response r = await http.get(
+        Uri.parse('http://35.172.228.146:8000/setbuilding?id=${widget.building.id}&data=${b.toJson()}'));
+
+      (Provider.of<AllStates>(context)).refreshBuildings();
+    } catch (e) {
+      print(e);
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +97,7 @@ class _AddRoomState extends State<AddRoom> {
                           RegExp(r'^.{0,12}')
                         )
                       ],
+                      controller: nameController,
                     ),
                   ),
                 )
@@ -96,6 +129,7 @@ class _AddRoomState extends State<AddRoom> {
                           )
                         )
                       ],
+                      controller: floorController,
                     ),
                   ),
                 )
@@ -121,6 +155,7 @@ class _AddRoomState extends State<AddRoom> {
                           RegExp(r'^.{0,3}')
                         )
                       ],
+                      controller: capacityController,
                     ),
                   ),
                 )
@@ -139,6 +174,7 @@ class _AddRoomState extends State<AddRoom> {
                         border: OutlineInputBorder(),
                         hintText: 'Room description',
                       ),
+                      controller: descController,
                     ),
                   ),
                 )
@@ -157,9 +193,9 @@ class _AddRoomState extends State<AddRoom> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(onPressed: ()=>{Navigator.of(context).pop()}, child: Text("Back")),
-                  ElevatedButton(onPressed: ()=>{
-                    Navigator.of(context).pop()
-
+                  ElevatedButton(onPressed: (){
+                    Navigator.of(context).pop();
+                    submit();
                   }, child: Text("Submit"))
                 ],
               )

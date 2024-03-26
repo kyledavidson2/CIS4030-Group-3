@@ -19,6 +19,15 @@ class Floor {
     }
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['level'] = this.level;
+    if (this.rooms != null) {
+      data['rooms'] = this.rooms!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+
   @override
   String toString(){
     switch(level){

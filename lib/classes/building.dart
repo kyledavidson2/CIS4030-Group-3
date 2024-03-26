@@ -28,6 +28,20 @@ class Building {
     long = json['long'];
   }
 
+  Map<String, dynamic> toJson(){
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['name'] = name;
+    data['abrv'] = abrv;
+    if (this.floors != null) {
+      data['floors'] = this.floors!.map((v) => v.toJson()).toList();
+    }
+    data['id'] = id;
+    data['lat'] = lat;
+    data['long'] = long;
+
+    return data;
+  }
+
   int firstFloor(){
     return floors.first.level;
   }
