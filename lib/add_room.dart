@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'classes/building.dart';
 import 'global_widgets.dart';
@@ -58,6 +59,12 @@ class _AddRoomState extends State<AddRoom> {
                         border: OutlineInputBorder(),
                         hintText: 'Name of room',
                       ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          // ignore: prefer_interpolation_to_compose_strings
+                          RegExp(r'^.{0,12}')
+                        )
+                      ],
                     ),
                   ),
                 )
@@ -70,13 +77,25 @@ class _AddRoomState extends State<AddRoom> {
                 Expanded(
                   // Constrain the width of the TextField within the Row
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextField(
-                      keyboardType: TextInputType.number,
+                      keyboardType: const TextInputType.numberWithOptions(
+                        decimal: false, signed: false),
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Floor',
+                        border: const OutlineInputBorder(),
+                        hintText: 'Floor (${widget.building.firstFloor().toString()}-${widget.building.lastFloor().toString()})',
                       ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          // ignore: prefer_interpolation_to_compose_strings
+                          RegExp(r'^[' 
+                            + widget.building.firstFloor().toString()
+                            + '-'
+                            + widget.building.lastFloor().toString()
+                            + ']'
+                          )
+                        )
+                      ],
                     ),
                   ),
                 )
@@ -96,6 +115,12 @@ class _AddRoomState extends State<AddRoom> {
                         border: OutlineInputBorder(),
                         hintText: 'Room Capacity',
                       ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          // ignore: prefer_interpolation_to_compose_strings
+                          RegExp(r'^.{0,3}')
+                        )
+                      ],
                     ),
                   ),
                 )

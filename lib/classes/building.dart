@@ -27,4 +27,12 @@ class Building {
     lat = json['lat'];
     long = json['long'];
   }
+
+  int firstFloor(){
+    return floors.first.level;
+  }
+
+  int lastFloor(){
+    return floors.last.level;
+  }
 }
