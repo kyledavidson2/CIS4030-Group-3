@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:group3_4030/classes/floor.dart';
+import 'package:group3_4030/classes/marker.dart';
 import 'package:group3_4030/room_page.dart';
 import 'package:provider/provider.dart';
 import 'classes/building.dart';
@@ -10,7 +11,10 @@ import 'building_page.dart';
 import 'reviews.dart';
 import 'classes/all_state.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'classes/marker.dart';
+//import 'classes/marker.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'add_review.dart';
 
 //Main HomePage for App
 class HomePage extends StatefulWidget {
@@ -25,17 +29,22 @@ class _HomePageState extends State<HomePage> {
   final List<Building> _searchResult = [];
   TextEditingController controller = TextEditingController();
 
-
-
-  //Testing Markers
-
-  //Set<Marker> test = setMarkers();
   
   //Setting the Coordinates for the Map to focus on the campus
   static const CameraPosition guelphCampus = CameraPosition(
     target: LatLng(43.530950, -80.226416),
     zoom: 14.5,
   );
+
+ var campusBuildingCoordinates = [];
+
+  Future<void> getCoordinates() async{
+      
+      final coordinatesResponse = await http.get(Uri.parse('http://35.172.228.146:8000/getbuilding'));
+      final coordinates = await json.decode(coordinatesResponse.body);
+      
+      campusBuildingCoordinates = coordinates;
+    }
 
   void _onItemTapped(int index) {
     changeFocus();
@@ -89,10 +98,54 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
+ Set<Marker> markers = {};
+ 
+  @override
+  void initState(){
+    super.initState();
+    getCoordinates();
+  }
+ 
   @override
   Widget build(BuildContext context) {
-    Set<Marker> test = setMarkers();
+    
+    for (var element in campusBuildingCoordinates)
+      {
+        if(element['abrv']!= "ZAV")
+        {
+        markers.add(Marker(
+          markerId: MarkerId(element['abrv']),
+          position: LatLng(element['lat'], element['long']),
+          infoWindow: InfoWindow(
+            title: element['name'],
+            snippet: "${element['name']} has new ${element['floors'].length} floors",
+            onTap: () {
+            print("");
+            Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BuildingPage(building: Building(
+         name: "Building name",
+                                     abrv: "err",
+                                     floors: [Floor(level: 1, rooms: [Room(
+                                       name: "Room Name",
+                                       floor: 20,
+                                       capacity: 20,
+                                       rating: 1,
+                                       numReviews: 0,
+                                       description: "asdf", )
+                                 ])
+                                  ]))),
+                      );
+            
+          },
+          ),
+          
+          ));
+        }
+      }
+    
+    
     return GestureDetector(
       onTap: changeFocus,
       child: Scaffold(
@@ -111,10 +164,10 @@ class _HomePageState extends State<HomePage> {
         ),
         body: <Widget>[
           Container(
-            //Image Placeholder for Maps
+            //Google map
             child: GoogleMap(
                   mapType: MapType.terrain, initialCameraPosition: guelphCampus,
-                  markers: test,
+                  markers: markers,
             ),
           ),
           Padding(
