@@ -48,6 +48,9 @@ class _AddRoomState extends State<AddRoom> {
       http.Response r = await http.get(
         Uri.parse('http://35.172.228.146:8000/setbuilding?id=${widget.building.id}&data=${jsonEncode(b.toJson())}'));
 
+      print(r.statusCode);
+      print(r.body);
+
       (Provider.of<AllStates>(context, listen: false)).refreshBuildings();
     } catch (e) {
       print(e);

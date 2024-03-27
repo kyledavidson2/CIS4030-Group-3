@@ -24,8 +24,8 @@ class Building {
       });
     }
     id = json['id'];
-    lat = json['lat'];
-    long = json['long'];
+    lat = json['lat'] ?? 0.0;
+    long = json['long'] ?? 0.0;
   }
 
   Map<String, dynamic> toJson(){
