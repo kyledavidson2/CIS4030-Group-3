@@ -60,6 +60,7 @@ class _HomePageState extends State<HomePage> {
           child: ListTile(
             title: ElevatedButton(
               onPressed: () => {
+                print(buildings[index].id),
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -118,8 +119,8 @@ class _HomePageState extends State<HomePage> {
           Container(
             //Image Placeholder for Maps
             child: GoogleMap(
-                  mapType: MapType.terrain, initialCameraPosition: guelphCampus,
-                  markers: markers,
+              mapType: MapType.terrain, initialCameraPosition: guelphCampus,
+              markers: markers,
             ),
           ),
           Padding(

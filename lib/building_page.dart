@@ -64,13 +64,23 @@ class _ExpansionPanelListExampleState extends State<ExpansionPanelListExample> {
       children: _data.map<ExpansionPanel>((Item item) {
         return ExpansionPanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
-            return ListTile(
-              title: Text(item.headerValue),
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  item.isExpanded = !item.isExpanded;
+                });
+              },
+              child: ListTile(
+                title: Text(item.headerValue),
+              ),
             );
           },
-          body: ListTile(
+          body: GestureDetector(
+            onTap: () {
+            },
+            child: ListTile(
               title: item.expandedValue,
-              onTap: () {}
+            ),
           ),
           isExpanded: item.isExpanded,
         );
@@ -105,10 +115,10 @@ class _BuildingPageState extends State<BuildingPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            AddRoom(
-                              building: building,
-                            )),
+                      builder: (context) =>
+                        AddRoom(
+                          building: building,
+                        )),
                   );
                 },
               )
@@ -152,10 +162,10 @@ class RoomGrid extends StatelessWidget{
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        RoomPage(
-                          room: r,
-                        )),
+                  builder: (context) =>
+                    RoomPage(
+                      room: r,
+                    )),
               );
             }, //navigate to RoomPage(r)
             child: Text(r.name)

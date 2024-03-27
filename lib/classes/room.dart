@@ -43,4 +43,15 @@ class Room {
 
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['floor'] = this.floor;
+    data['capacity'] = this.capacity;
+    data['rating'] = this.rating;
+    data['numReviews'] = this.numReviews;
+    data['description'] = this.description;
+    return data;
+  }
+
 }

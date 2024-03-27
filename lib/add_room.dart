@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'classes/all_state.dart';
+import 'dart:convert';
 
 import 'classes/building.dart';
+import 'classes/room.dart';
 import 'global_widgets.dart';
 
 //Main HomePage for App
@@ -13,6 +19,46 @@ class AddRoom extends StatefulWidget {
 }
 
 class _AddRoomState extends State<AddRoom> {
+  final nameController = TextEditingController();
+  final floorController = TextEditingController();
+  final capacityController = TextEditingController();
+  final descController = TextEditingController();
+
+  Future<bool> submit() async{
+    Building b = widget.building;
+    try {
+      int f = int.parse(floorController.text);
+
+      //handle case where there is ground floor or not
+      if (b.firstFloor() != 0){
+        f--;
+      }
+
+      b.floors[f].rooms.add(
+        Room(
+          name: nameController.text,
+          floor: f,
+          capacity: int.parse(capacityController.text),
+          description: descController.text,
+        )
+      );
+
+      print('http://35.172.228.146:8000/setbuilding?id=${widget.building.id}&data=${jsonEncode(b.toJson())}');
+      
+      http.Response r = await http.get(
+        Uri.parse('http://35.172.228.146:8000/setbuilding?id=${widget.building.id}&data=${jsonEncode(b.toJson())}'));
+
+      print(r.statusCode);
+      print(r.body);
+
+      (Provider.of<AllStates>(context, listen: false)).refreshBuildings();
+    } catch (e) {
+      print(e);
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +104,13 @@ class _AddRoomState extends State<AddRoom> {
                         border: OutlineInputBorder(),
                         hintText: 'Name of room',
                       ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          // ignore: prefer_interpolation_to_compose_strings
+                          RegExp(r'^.{0,12}')
+                        )
+                      ],
+                      controller: nameController,
                     ),
                   ),
                 )
@@ -70,13 +123,26 @@ class _AddRoomState extends State<AddRoom> {
                 Expanded(
                   // Constrain the width of the TextField within the Row
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextField(
-                      keyboardType: TextInputType.number,
+                      keyboardType: const TextInputType.numberWithOptions(
+                        decimal: false, signed: false),
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Floor',
+                        border: const OutlineInputBorder(),
+                        hintText: 'Floor (${widget.building.firstFloor().toString()}-${widget.building.lastFloor().toString()})',
                       ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          // ignore: prefer_interpolation_to_compose_strings
+                          RegExp(r'^[' 
+                            + widget.building.firstFloor().toString()
+                            + '-'
+                            + widget.building.lastFloor().toString()
+                            + ']'
+                          )
+                        )
+                      ],
+                      controller: floorController,
                     ),
                   ),
                 )
@@ -96,6 +162,13 @@ class _AddRoomState extends State<AddRoom> {
                         border: OutlineInputBorder(),
                         hintText: 'Room Capacity',
                       ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          // ignore: prefer_interpolation_to_compose_strings
+                          RegExp(r'^.{0,3}')
+                        )
+                      ],
+                      controller: capacityController,
                     ),
                   ),
                 )
@@ -114,6 +187,7 @@ class _AddRoomState extends State<AddRoom> {
                         border: OutlineInputBorder(),
                         hintText: 'Room description',
                       ),
+                      controller: descController,
                     ),
                   ),
                 )
@@ -132,9 +206,9 @@ class _AddRoomState extends State<AddRoom> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(onPressed: ()=>{Navigator.of(context).pop()}, child: Text("Back")),
-                  ElevatedButton(onPressed: ()=>{
-                    Navigator.of(context).pop()
-
+                  ElevatedButton(onPressed: (){
+                    Navigator.of(context).pop();
+                    submit();
                   }, child: Text("Submit"))
                 ],
               )

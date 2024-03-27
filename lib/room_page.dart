@@ -23,15 +23,49 @@ class _RoomPageState extends State<RoomPage> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 200,
-              width: double.infinity,
-              color: const Color.fromARGB(11, 11, 11, 11),
-              //child: const Text("image here")
-              child: Image.asset(
-                'assets/mins300.jpg',
-                fit: BoxFit.fitWidth,
-              ),
+            Stack(
+              children: [
+                Container(
+                  height: 200,
+                  width: double.infinity,
+                  color: const Color.fromARGB(11, 11, 11, 11),
+                  //child: const Text("image here")
+                  child: PageView(
+                    onPageChanged: (int i){},
+                    children: [
+                      Image.asset(
+                       'assets/mins300.jpg',
+                        fit: BoxFit.fitWidth,
+                      ), 
+                      Image.asset(
+                       'assets/mins300.jpg',
+                        fit: BoxFit.fitWidth,
+                      ),
+                      Image.asset(
+                       'assets/mins300.jpg',
+                        fit: BoxFit.fitWidth,
+                      ),  
+                    ]
+                  ),
+                  
+                        
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Ink(
+                    decoration: const ShapeDecoration(
+                      color: Colors.lightBlue,
+                      shape: CircleBorder(),
+                    ),
+                    child: IconButton.filled(
+                      iconSize: 26,
+                      icon: const Icon(Icons.add_a_photo),
+                      color: Colors.white,
+                      onPressed: (){},
+                    ),
+                  )
+                )
+              ]
             ),
             const Divider(),
             Row(

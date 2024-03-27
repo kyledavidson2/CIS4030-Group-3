@@ -4,6 +4,9 @@ class Building {
   String name = "";
   String abrv = "";
   List<Floor> floors = [];
+  int id = -1;
+  double lat = 0.0;
+  double long = 0.0;
 
   Building({
     required this.name,
@@ -20,5 +23,30 @@ class Building {
         floors.add(Floor.fromJson(v));
       });
     }
+    id = json['id'];
+    lat = json['lat'] ?? 0.0;
+    long = json['long'] ?? 0.0;
+  }
+
+  Map<String, dynamic> toJson(){
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['name'] = name;
+    data['abrv'] = abrv;
+    if (this.floors != null) {
+      data['floors'] = this.floors!.map((v) => v.toJson()).toList();
+    }
+    data['id'] = id;
+    data['lat'] = lat;
+    data['long'] = long;
+
+    return data;
+  }
+
+  int firstFloor(){
+    return floors.first.level;
+  }
+
+  int lastFloor(){
+    return floors.last.level;
   }
 }
