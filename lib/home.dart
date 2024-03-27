@@ -24,10 +24,24 @@ class _HomePageState extends State<HomePage> {
   final List<Building> _searchResult = [];
   TextEditingController controller = TextEditingController();
 
+
+  //Marker for buildings
+  static const Marker buildingMarker1 = Marker(
+     markerId: MarkerId("Alex"),
+     position: LatLng(43.52956814339412, -80.22754587407422)
+    );
+
+    static const Marker buildingMarker2 = Marker(
+     markerId: MarkerId("Thorn"),
+     position: LatLng(43.53047104106505, -80.22464813174554)
+    );
+  //Testing Markers
+  Set<Marker> markers = {buildingMarker1,buildingMarker2};
+  
   //Setting the Coordinates for the Map to focus on the campus
   static const CameraPosition guelphCampus = CameraPosition(
     target: LatLng(43.530950, -80.226416),
-    zoom: 18.1,
+    zoom: 14.5,
   );
 
   void _onItemTapped(int index) {
@@ -104,10 +118,10 @@ class _HomePageState extends State<HomePage> {
         body: <Widget>[
           Container(
             //Image Placeholder for Maps
-            //child: GoogleMap(
-            //  mapType: MapType.hybrid, initialCameraPosition: guelphCampus,
-            //),
-            child: Text("map not loaded to save requests"),
+            child: GoogleMap(
+              mapType: MapType.terrain, initialCameraPosition: guelphCampus,
+              markers: markers,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(4.0),
