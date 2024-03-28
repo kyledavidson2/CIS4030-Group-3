@@ -17,6 +17,7 @@ class AllStates extends ChangeNotifier {
   }
 
   void refreshBuildings(){
+    _buildings = [];
     readJson();
   }
 
