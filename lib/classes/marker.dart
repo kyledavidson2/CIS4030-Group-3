@@ -17,7 +17,7 @@ Set<Marker> setMarkers()
 
 Future<void> getCoordinates() async{
   
-  final coordinatesResponse = await http.get(Uri.parse('http://35.172.228.146:8000/getbuilding'));
+  final coordinatesResponse = await http.get(Uri.parse('http://3.95.246.42:8000/getbuilding'));
   final coordinates = await json.decode(coordinatesResponse.body);
  
   for (var element in coordinates) 

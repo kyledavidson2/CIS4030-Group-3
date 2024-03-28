@@ -17,19 +17,20 @@ class Item {
   bool isExpanded;
 }
 
-List<Item> generateItems(List<Floor> floors) {
+List<Item> generateItems(List<Floor> floors, Building parent) {
   return List<Item>.generate(floors.length, (int index) {
     return Item(
       headerValue: floors[index].toString(),
-      expandedValue: RoomGrid(floor: floors[index]),
+      expandedValue: RoomGrid(floor: floors[index], building: parent,),
     );
   });
 }
 
 class ExpansionPanelListExample extends StatefulWidget {
-  const ExpansionPanelListExample({super.key, required this.floors});
+  const ExpansionPanelListExample({super.key, required this.floors, required this.buildingParent});
 
   final List<Floor> floors;
+  final Building buildingParent;
 
   @override
   State<ExpansionPanelListExample> createState() =>
@@ -42,7 +43,7 @@ class _ExpansionPanelListExampleState extends State<ExpansionPanelListExample> {
   @override
   void initState() {
     super.initState();
-    _data = generateItems(widget.floors);
+    _data = generateItems(widget.floors, widget.buildingParent);
   }
 
   @override
@@ -138,15 +139,16 @@ class _BuildingPageState extends State<BuildingPage> {
           )
         ],
       ),
-      body: ExpansionPanelListExample(floors: building.floors)
+      body: ExpansionPanelListExample(floors: building.floors, buildingParent: building,)
     );
   }
 }
 
 class RoomGrid extends StatelessWidget{
-  const RoomGrid({super.key, required this.floor});
+  const RoomGrid({super.key, required this.floor, required this.building});
 
   final Floor floor;
+  final Building building;
 
   @override
   Widget build(BuildContext context) {
@@ -165,6 +167,7 @@ class RoomGrid extends StatelessWidget{
                   builder: (context) =>
                     RoomPage(
                       room: r,
+                      building: building ,
                     )),
               );
             }, //navigate to RoomPage(r)

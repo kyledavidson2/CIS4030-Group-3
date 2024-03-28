@@ -1,15 +1,16 @@
 import 'dart:convert';
-import 'package:group3_4030/classes/dataLoader.dart';
+// import 'package:group3_4030/classes/dataLoader.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'building.dart';
+import 'buildingData.dart';
 class AllStates extends ChangeNotifier {
   List <Building> _buildings = [];
 
   List<Building> get buildings => _buildings;
-  DataLoader loader = DataLoader();
+  // DataLoader loader = DataLoader();
 
   AllStates() {
     readJson();
@@ -19,9 +20,6 @@ class AllStates extends ChangeNotifier {
     readJson();
   }
 
-  Future<http.Response> getBuildings(){
-    return http.get(Uri.parse('http://35.172.228.146:8000/getbuilding'));
-  }
 
   Future<void> readJson() async {
     List building_list;
@@ -29,8 +27,8 @@ class AllStates extends ChangeNotifier {
     //final String response =
     //  await rootBundle.loadString('assets/buildings.json');
     //final data = await json.decode(response);
-
-    final http.Response r = await getBuildings();
+    BuildingData b = BuildingData();
+    final http.Response r = await b.getBuildings();
     final data = await json.decode(r.body);
 
     building_list = data;
@@ -40,6 +38,15 @@ class AllStates extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  Building? getBuildingById(String id){
+    for (var element in _buildings){
+      if (element.id == int.parse(id)){
+        return element;
+      }
+    }
+    return null;
   }
 
 

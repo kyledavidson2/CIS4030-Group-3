@@ -27,7 +27,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
           child:ListView.separated(
             itemCount: 8,
             itemBuilder: (BuildContext context, index){
-              return UserReview(reviewNumber: index, reviewRating: index, reviewContent: review);
+              return UserReview(reviewNumber: 1, reviewRating: index, reviewContent: review);
               
             },
             separatorBuilder: (context, index) {
@@ -63,7 +63,7 @@ class UserReview extends StatelessWidget{
       tileColor: Colors.blueGrey,
       iconColor: Colors.yellow,
       leading: const Icon(Icons.reviews),
-      trailing:const Icon(Icons.star_rate),
+      trailing: Text("4"), //const Icon(Icons.star_rate),
       title: Text("Review #$reviewNumber",style: const TextStyle(color: Colors.white),),
       subtitle: Text(reviewContent, style: const TextStyle(color: Colors.white),),
       isThreeLine: true,

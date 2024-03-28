@@ -15,6 +15,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'add_review.dart';
+import 'classes/buildingData.dart';
 
 //Main HomePage for App
 class HomePage extends StatefulWidget {
@@ -39,8 +40,8 @@ class _HomePageState extends State<HomePage> {
  var campusBuildingCoordinates = [];
 
   Future<void> getCoordinates() async{
-      
-      final coordinatesResponse = await http.get(Uri.parse('http://35.172.228.146:8000/getbuilding'));
+      BuildingData b = BuildingData();
+      final coordinatesResponse = await b.getBuildings();
       final coordinates = await json.decode(coordinatesResponse.body);
       
       campusBuildingCoordinates = coordinates;
@@ -121,22 +122,12 @@ class _HomePageState extends State<HomePage> {
             title: element['name'],
             snippet: "${element['name']} has new ${element['floors'].length} floors",
             onTap: () {
-            print("");
+            print("element id : " + element['id'].toString());
+            print("element id : " + element.toString());
             Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => BuildingPage(building: Building(
-         name: "Building name",
-                                     abrv: "err",
-                                     floors: [Floor(level: 1, rooms: [Room(
-                                       name: "Room Name",
-                                       floor: 20,
-                                       capacity: 20,
-                                       rating: 1,
-                                       numReviews: 0,
-                                       description: "asdf", )
-                                 ])
-                                  ]))),
+                            builder: (context) => BuildingPage(building: Building.fromJson(element))),
                       );
             
           },
@@ -157,8 +148,15 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
               icon: const Icon(Icons.person),
-              onPressed: () {
+              onPressed:  () async{
                 print("User clicked!");
+                BuildingData d = BuildingData();
+
+                final response = await d.getBuildingById(15);
+                if(response.statusCode == 200){
+                  print(response.body);
+                }
+
               },
             ),
           ],

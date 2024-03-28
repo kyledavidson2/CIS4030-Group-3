@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:group3_4030/home.dart';
 import 'package:group3_4030/reviews.dart';
+import 'classes/building.dart';
 import 'global_widgets.dart';
 import 'classes/room.dart';
 
 class RoomPage extends StatefulWidget {
-  const RoomPage({super.key, required this.room});
+  const RoomPage({super.key, required this.room, required this.building});
   final Room room;
+  final Building building;
 
   @override
   State<RoomPage> createState() => _RoomPageState();
@@ -99,7 +102,15 @@ class _RoomPageState extends State<RoomPage> {
                   TextButton.icon(
                     icon: const Icon(Icons.location_on),
                     label: const Text("View on Map", style: TextStyle(fontSize: 16, decoration: TextDecoration.underline)),
-                    onPressed: (){} //go to map
+                    onPressed: (){
+                      print(widget.building.name);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePage()
+                        ),
+                      );
+                    } //go to map
                   ),
                   const VerticalDivider(width: 20, color: Colors.transparent),
                   TextButton.icon(

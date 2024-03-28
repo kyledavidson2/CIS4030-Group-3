@@ -43,10 +43,10 @@ class _AddRoomState extends State<AddRoom> {
         )
       );
 
-      print('http://35.172.228.146:8000/setbuilding?id=${widget.building.id}&data=${jsonEncode(b.toJson())}');
+      print('http://3.95.246.42:8000/setbuilding?id=${widget.building.id}&data=${jsonEncode(b.toJson())}');
       
       http.Response r = await http.get(
-        Uri.parse('http://35.172.228.146:8000/setbuilding?id=${widget.building.id}&data=${jsonEncode(b.toJson())}'));
+        Uri.parse('http://3.95.246.42:8000/setbuilding?id=${widget.building.id}&data=${jsonEncode(b.toJson())}'));
 
       print(r.statusCode);
       print(r.body);
