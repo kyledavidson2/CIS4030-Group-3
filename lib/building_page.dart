@@ -158,7 +158,7 @@ class RoomGrid extends StatelessWidget{
       crossAxisCount: 2,
       childAspectRatio: (1/.3),
       children: <Widget>[
-        for (Room r in floor.rooms)
+        for ( final  (index,Room r)  in floor.rooms.indexed)
           TextButton(
             onPressed: () {
               Navigator.push(
@@ -168,11 +168,14 @@ class RoomGrid extends StatelessWidget{
                     RoomPage(
                       room: r,
                       building: building ,
+                      roomIdx: index,
+                      floorIdx: r.floor,
                     )),
               );
             }, //navigate to RoomPage(r)
             child: Text(r.name)
           )
+
       ]
     );
   }

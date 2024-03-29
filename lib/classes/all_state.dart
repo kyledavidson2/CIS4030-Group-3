@@ -9,6 +9,7 @@ import 'buildingData.dart';
 class AllStates extends ChangeNotifier {
   List <Building> _buildings = [];
 
+
   List<Building> get buildings => _buildings;
   // DataLoader loader = DataLoader();
 
@@ -25,13 +26,14 @@ class AllStates extends ChangeNotifier {
   Future<void> readJson() async {
     List building_list;
 
-    //final String response =
-    //  await rootBundle.loadString('assets/buildings.json');
-    //final data = await json.decode(response);
-    BuildingData b = BuildingData();
-    final http.Response r = await b.getBuildings();
-    final data = await json.decode(r.body);
-
+    // try:
+      BuildingData b = BuildingData();
+      final http.Response r = await b.getBuildings();
+      final data = await json.decode(r.body);
+    // Exception:
+    //   final String response =
+    //    await rootBundle.loadString('assets/buildings.json');
+    //   final data = await json.decode(response);
     building_list = data;
     for (var element in building_list) {
       Building b = Building.fromJson(element);

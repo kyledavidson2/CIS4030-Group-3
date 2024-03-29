@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:group3_4030/classes/floor.dart';
-import 'package:group3_4030/classes/marker.dart';
 import 'package:group3_4030/room_page.dart';
 import 'package:provider/provider.dart';
 import 'classes/building.dart';
@@ -11,7 +10,6 @@ import 'building_page.dart';
 import 'reviews.dart';
 import 'classes/all_state.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-//import 'classes/marker.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'add_review.dart';
@@ -39,13 +37,14 @@ class _HomePageState extends State<HomePage> {
 
  var campusBuildingCoordinates = [];
 
-  Future<void> getCoordinates() async{
-      BuildingData b = BuildingData();
-      final coordinatesResponse = await b.getBuildings();
-      final coordinates = await json.decode(coordinatesResponse.body);
-      
-      campusBuildingCoordinates = coordinates;
-    }
+  // Future<void> getCoordinates() async{
+  //     BuildingData b = BuildingData();
+  //     final coordinatesResponse = await b.getBuildings();
+  //     final coordinates = await json.decode(coordinatesResponse.body);
+  //
+  //     campusBuildingCoordinates = coordinates;
+  //
+  // }
 
   void _onItemTapped(int index) {
     changeFocus();
@@ -105,37 +104,43 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState(){
     super.initState();
-    getCoordinates();
+    // getCoordinates();
+    // setMarker();
   }
- 
+
+
+
+  void setMarker(){
+    for (var element in (Provider.of<AllStates>(context)).buildings)
+    {
+      if(element.abrv!= "ZAV")
+      {
+        markers.add(Marker(
+          markerId: MarkerId(element.id.toString()),
+          position: LatLng(element.lat, element.long),
+          infoWindow: InfoWindow(
+            title: element.name,
+            snippet: "${element.name} has new ${element.floors.length} floors",
+            onTap: () {
+              print("element id : ${element.id}");
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BuildingPage(building: element)),
+              );
+
+            },
+          ),
+
+        ));
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    
-    for (var element in campusBuildingCoordinates)
-      {
-        if(element['abrv']!= "ZAV")
-        {
-        markers.add(Marker(
-          markerId: MarkerId(element['abrv']),
-          position: LatLng(element['lat'], element['long']),
-          infoWindow: InfoWindow(
-            title: element['name'],
-            snippet: "${element['name']} has new ${element['floors'].length} floors",
-            onTap: () {
-            print("element id : " + element['id'].toString());
-            print("element id : " + element.toString());
-            Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BuildingPage(building: Building.fromJson(element))),
-                      );
-            
-          },
-          ),
-          
-          ));
-        }
-      }
+
+    setMarker();
     
     
     return GestureDetector(
@@ -165,8 +170,11 @@ class _HomePageState extends State<HomePage> {
           Container(
             //Google map
             child: GoogleMap(
-              mapType: MapType.terrain, initialCameraPosition: guelphCampus,
+              mapType: MapType.terrain,
+              initialCameraPosition: guelphCampus,
               markers: markers,
+
+
             ),
           ),
           Padding(

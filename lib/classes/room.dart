@@ -2,6 +2,8 @@
 
 
 
+import 'package:group3_4030/classes/review.dart';
+
 class Room {
   String name = "";
   int floor = 0;
@@ -9,6 +11,7 @@ class Room {
   double rating = 0.0;
   int numReviews = 0;
   String description = "";
+  List<Review> reviews =[];
 
   /* Not sure how to implement photos, maybe a list of file paths if they
   are stored locally. Or something else if they are fetched from a
@@ -29,7 +32,7 @@ class Room {
     floor = json['floor'];
     capacity = json['capacity'];
     if (json.containsKey('rating')){
-      print(json['name'].toString());
+      // print(json['name'].toString());
       if(json['rating'] is int){
         rating = json['rating'].toDouble();
       }
@@ -38,8 +41,16 @@ class Room {
       }
 
     }
-    numReviews = json['numReviews'];
+
     description = json['description'];
+
+    reviews = <Review>[];
+    if (json.containsKey('reviews')){
+      json['reviews'].forEach((review) {
+        reviews.add(Review.fromJson(review));
+      });
+      numReviews = reviews.length;
+    }
 
   }
 
@@ -51,6 +62,7 @@ class Room {
     data['rating'] = this.rating;
     data['numReviews'] = this.numReviews;
     data['description'] = this.description;
+    data['reviews'] = this.reviews;
     return data;
   }
 

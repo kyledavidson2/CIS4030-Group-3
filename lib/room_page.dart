@@ -6,8 +6,10 @@ import 'global_widgets.dart';
 import 'classes/room.dart';
 
 class RoomPage extends StatefulWidget {
-  const RoomPage({super.key, required this.room, required this.building});
+  const RoomPage({super.key, required this.room, required this.building, required this.roomIdx, required this.floorIdx});
   final Room room;
+  final int  roomIdx;
+  final int  floorIdx;
   final Building building;
 
   @override
@@ -117,10 +119,19 @@ class _RoomPageState extends State<RoomPage> {
                     icon: const Icon(Icons.star),
                     label: Text("Reviews (${room.numReviews})", style: const TextStyle(fontSize: 16, decoration: TextDecoration.underline)),
                     onPressed: (){
+
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ReviewsPage()),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ReviewsPage(
+                                  building: widget.building,
+                                  room: widget.room,
+                                  roomIdx: widget.roomIdx,
+                                  floorIdx: widget.floorIdx,
+                                )),
                       );
+
                     }
                   ),
                 ]
