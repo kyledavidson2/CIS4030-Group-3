@@ -63,11 +63,11 @@ class _HomePageState extends State<HomePage> {
           child: ListTile(
             title: ElevatedButton(
               onPressed: () => {
-                print(buildings[index].id),
+                // print(buildings[index].id),
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BuildingPage(building:  buildings[index])
+                    builder: (context) => BuildingPage(buildingIdx:  index)
                   ),
                 )
               },
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
 
 
   void setMarker(){
-    for (var element in (Provider.of<AllStates>(context)).buildings)
+    for (var element in (Provider.of<AllStates>(context,listen: false)).buildings)
     {
       if(element.abrv!= "ZAV")
       {
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => BuildingPage(building: element)),
+                    builder: (context) => BuildingPage(buildingIdx: element.id,)),
               );
 
             },
@@ -140,9 +140,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    setMarker();
-    
-    
     return GestureDetector(
       onTap: changeFocus,
       child: Scaffold(
@@ -172,7 +169,28 @@ class _HomePageState extends State<HomePage> {
             child: GoogleMap(
               mapType: MapType.terrain,
               initialCameraPosition: guelphCampus,
-              markers: markers,
+              markers:  Set<Marker>.from((Provider.of<AllStates>(context, listen: false)).buildings.map((element) {
+                return Marker(
+                  markerId: MarkerId(element.id.toString()),
+                  position: LatLng(element.lat, element.long),
+                  infoWindow: InfoWindow(
+                    title: element.name,
+                    snippet: "${element.name} has new ${element.floors.length} floors",
+                    onTap: () {
+                      // print("element id : ${element.id}");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BuildingPage(buildingIdx: element.id),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }))
+
+
+
 
 
             ),

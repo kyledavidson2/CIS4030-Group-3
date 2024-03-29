@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:group3_4030/home.dart';
 import 'package:group3_4030/reviews.dart';
+import 'package:provider/provider.dart';
+import 'classes/all_state.dart';
 import 'classes/building.dart';
 import 'global_widgets.dart';
 import 'classes/room.dart';
 
 class RoomPage extends StatefulWidget {
-  const RoomPage({super.key, required this.room, required this.building, required this.roomIdx, required this.floorIdx});
-  final Room room;
+  const RoomPage({super.key,  required this.buildingIdx, required this.roomIdx, required this.floorIdx});
   final int  roomIdx;
   final int  floorIdx;
-  final Building building;
+  final int  buildingIdx;
+
 
   @override
   State<RoomPage> createState() => _RoomPageState();
@@ -20,7 +22,7 @@ class _RoomPageState extends State<RoomPage> {
 
   @override
   Widget build(BuildContext context) {
-    Room room = widget.room;
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -77,7 +79,7 @@ class _RoomPageState extends State<RoomPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "   ${room.name} ",
+                  "   ${(Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].name} ",
                   style: const TextStyle(
                     fontSize: 26,
                   )
@@ -86,7 +88,7 @@ class _RoomPageState extends State<RoomPage> {
                   children: [
                     const Icon(Icons.star, color: Colors.amber, size: 28),
                     Text(
-                      "${room.rating}  ", 
+                      "${(Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].rating}  ",
                       style: const TextStyle(
                         fontSize: 26,
                         //decoration: TextDecoration.underline
@@ -105,7 +107,7 @@ class _RoomPageState extends State<RoomPage> {
                     icon: const Icon(Icons.location_on),
                     label: const Text("View on Map", style: TextStyle(fontSize: 16, decoration: TextDecoration.underline)),
                     onPressed: (){
-                      print(widget.building.name);
+                      print((Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].name);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -117,7 +119,7 @@ class _RoomPageState extends State<RoomPage> {
                   const VerticalDivider(width: 20, color: Colors.transparent),
                   TextButton.icon(
                     icon: const Icon(Icons.star),
-                    label: Text("Reviews (${room.numReviews})", style: const TextStyle(fontSize: 16, decoration: TextDecoration.underline)),
+                    label: Text("Reviews (${(Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].numReviews})", style: const TextStyle(fontSize: 16, decoration: TextDecoration.underline)),
                     onPressed: (){
 
                       Navigator.push(
@@ -125,8 +127,8 @@ class _RoomPageState extends State<RoomPage> {
                         MaterialPageRoute(
                             builder: (context) =>
                                 ReviewsPage(
-                                  building: widget.building,
-                                  room: widget.room,
+                                  buildingIdx: widget.buildingIdx,
+                                  room: (Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx],
                                   roomIdx: widget.roomIdx,
                                   floorIdx: widget.floorIdx,
                                 )),
@@ -145,19 +147,19 @@ class _RoomPageState extends State<RoomPage> {
                 children: [
                   const Text("Statistics:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                   Text(
-                    " Floor: ${room.floor.toString()}",
+                    " Floor: ${(Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].floor.toString()}",
                     style: const TextStyle(
                       fontSize: 18,
                     )
                   ),
                   Text(
-                    " Number of Seats: ${room.capacity.toString()}",
+                    " Number of Seats: ${(Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].capacity.toString()}",
                     style: const TextStyle(
                       fontSize: 18,
                     )
                   ),
                   Text(
-                    " Description: ${room.description.toString()}",
+                    " Description: ${(Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].description.toString()}",
                     style: const TextStyle(
                       fontSize: 18,
                     )

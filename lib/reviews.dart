@@ -9,8 +9,8 @@ import 'classes/room.dart';
 
 //Main Reviews Page
 class ReviewsPage extends StatefulWidget {
-  ReviewsPage({super.key, required this.building,required this.room, required this.floorIdx, required this.roomIdx});
-  final Building building;
+  ReviewsPage({super.key, required this.buildingIdx,required this.room, required this.floorIdx, required this.roomIdx});
+  final int buildingIdx;
   final Room room;
   final int roomIdx;
   final int floorIdx;
@@ -59,7 +59,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AddReview(building: widget.building, roomIdx: widget.roomIdx,floorIdx: widget.floorIdx,)),
+                            builder: (context) => AddReview(buildingIdx: widget.buildingIdx, roomIdx: widget.roomIdx,floorIdx: widget.floorIdx,)),
                       );
           },
           child: Icon(Icons.add),

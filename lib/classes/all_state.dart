@@ -17,15 +17,19 @@ class AllStates extends ChangeNotifier {
     readJson();
   }
 
-  void refreshBuildings(){
+  Future<void> refreshBuildings() async{
     _buildings = [];
-    readJson();
+    await readJson();
+    notifyListeners();
   }
 
+  Future<void> setBuildings(List<Building> buildings)async{
+    _buildings = buildings;
+    notifyListeners();
+  }
 
   Future<void> readJson() async {
     List building_list;
-
     // try:
       BuildingData b = BuildingData();
       final http.Response r = await b.getBuildings();
@@ -40,7 +44,6 @@ class AllStates extends ChangeNotifier {
       _buildings.add(b);
     }
 
-    notifyListeners();
   }
 
   Building? getBuildingById(String id){

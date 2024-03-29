@@ -12,7 +12,8 @@ import 'global_widgets.dart';
 
 //Main HomePage for App
 class AddRoom extends StatefulWidget {
-  const AddRoom({super.key, required this.building});
+  const AddRoom({super.key,  required this.buildingIdx, required this.building});
+  final int buildingIdx;
   final Building building;
 
   @override
@@ -44,8 +45,8 @@ class _AddRoomState extends State<AddRoom> {
         )
       );
       BuildingData bd = BuildingData();
-      final response = await bd.setBuilding(widget.building.id, jsonEncode(b.toJson()));
-      print('http://3.95.246.42:8000/setbuilding?id=${widget.building.id}&data=${jsonEncode(b.toJson())}');
+      final response = await bd.setBuilding(b.id, jsonEncode(b.toJson()));
+      print('http://3.95.246.42:8000/setbuilding?id=${ (Provider.of<AllStates>(context,listen: false)).buildings[widget.buildingIdx].id}&data=${jsonEncode(b.toJson())}');
       print(response.statusCode);
       print(response.body);
 
@@ -56,7 +57,7 @@ class _AddRoomState extends State<AddRoom> {
       // print(r.statusCode);
       // print(r.body);
 
-      (Provider.of<AllStates>(context, listen: false)).refreshBuildings();
+      await (Provider.of<AllStates>(context, listen: false)).refreshBuildings();
     } catch (e) {
       print(e);
       return false;
@@ -92,7 +93,7 @@ class _AddRoomState extends State<AddRoom> {
             children: <Widget>[
               Center(
                   child: Text(
-                    widget.building.name,
+                    (Provider.of<AllStates>(context)).buildings[widget.buildingIdx].name,
                 style: TextStyle(fontSize: 20),
               )),
               Row(children: [
@@ -134,15 +135,15 @@ class _AddRoomState extends State<AddRoom> {
                         decimal: false, signed: false),
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        hintText: 'Floor (${widget.building.firstFloor().toString()}-${widget.building.lastFloor().toString()})',
+                        hintText: 'Floor (${ (Provider.of<AllStates>(context)).buildings[widget.buildingIdx].firstFloor().toString()}-${ (Provider.of<AllStates>(context)).buildings[widget.buildingIdx].lastFloor().toString()})',
                       ),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(
                           // ignore: prefer_interpolation_to_compose_strings
                           RegExp(r'^[' 
-                            + widget.building.firstFloor().toString()
+                            +  (Provider.of<AllStates>(context)).buildings[widget.buildingIdx].firstFloor().toString()
                             + '-'
-                            + widget.building.lastFloor().toString()
+                            +  (Provider.of<AllStates>(context)).buildings[widget.buildingIdx].lastFloor().toString()
                             + ']'
                           )
                         )

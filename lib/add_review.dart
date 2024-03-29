@@ -12,11 +12,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 
 class AddReview extends StatefulWidget {
-  AddReview({super.key, required this.building, required this.roomIdx, required this.floorIdx});
+  AddReview({super.key, required this.buildingIdx, required this.roomIdx, required this.floorIdx});
   final int roomIdx;
   final int floorIdx;
+  final int buildingIdx;
   int rating = 2;
-  Building building;
+
 
 
   @override
@@ -26,10 +27,8 @@ class _AddReviewState extends State<AddReview>{
 
   final descController = TextEditingController();
    Future<bool> submit() async{
-     Building b = widget.building;
+     Building b = (Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx];
      try {
-
-
        //handle case where there is ground floor or not
 
 
@@ -42,12 +41,12 @@ class _AddReviewState extends State<AddReview>{
        b.floors[widget.floorIdx].rooms[widget.roomIdx].numReviews = b.floors[widget.floorIdx].rooms[widget.roomIdx].reviews.length;
 
        BuildingData bd = BuildingData();
-       final response = await bd.setBuilding(widget.building.id, jsonEncode(b.toJson()));
+       final response = await bd.setBuilding((Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].id, jsonEncode(b.toJson()));
        print(response.statusCode);
        print(response.body);
 
 
-       (Provider.of<AllStates>(context, listen: false)).refreshBuildings();
+       await (Provider.of<AllStates>(context, listen: false)).refreshBuildings();
      } catch (e) {
        print(e);
        return false;

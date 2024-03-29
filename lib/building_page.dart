@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:group3_4030/add_room.dart';
 import 'package:group3_4030/room_page.dart';
+import 'package:provider/provider.dart';
+import 'classes/all_state.dart';
 import 'classes/room.dart';
 import 'classes/building.dart';
 import 'classes/floor.dart';
@@ -17,20 +19,20 @@ class Item {
   bool isExpanded;
 }
 
-List<Item> generateItems(List<Floor> floors, Building parent) {
+List<Item> generateItems(List<Floor> floors, int buildingIdx) {
   return List<Item>.generate(floors.length, (int index) {
     return Item(
       headerValue: floors[index].toString(),
-      expandedValue: RoomGrid(floor: floors[index], building: parent,),
+      expandedValue: RoomGrid(flooridx: index, buildingIdx:buildingIdx ),
     );
   });
 }
 
 class ExpansionPanelListExample extends StatefulWidget {
-  const ExpansionPanelListExample({super.key, required this.floors, required this.buildingParent});
+  const ExpansionPanelListExample({super.key, required this.floors, required this.buildingParentIdx});
 
   final List<Floor> floors;
-  final Building buildingParent;
+  final int buildingParentIdx;
 
   @override
   State<ExpansionPanelListExample> createState() =>
@@ -43,7 +45,7 @@ class _ExpansionPanelListExampleState extends State<ExpansionPanelListExample> {
   @override
   void initState() {
     super.initState();
-    _data = generateItems(widget.floors, widget.buildingParent);
+    _data = generateItems(widget.floors, widget.buildingParentIdx);
   }
 
   @override
@@ -91,8 +93,8 @@ class _ExpansionPanelListExampleState extends State<ExpansionPanelListExample> {
 }
 
 class BuildingPage extends StatefulWidget {
-  const BuildingPage({super.key, required this.building});
-  final Building building;
+  const BuildingPage({super.key, required this.buildingIdx});
+  final int buildingIdx;
 
   @override
   State<BuildingPage> createState() => _BuildingPageState();
@@ -102,11 +104,12 @@ class _BuildingPageState extends State<BuildingPage> {
 
   @override
   Widget build(BuildContext context) {
-    Building building = widget.building;
+    Building b = (Provider.of<AllStates>(context, listen: true)).buildings[widget.buildingIdx];
+    print("number of rooms in allstate "+ (Provider.of<AllStates>(context, listen: true)).buildings[widget.buildingIdx].floors[0].rooms.length.toString());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(building.name),
+        title: Text((Provider.of<AllStates>(context, listen: true)).buildings[widget.buildingIdx].name),
         actions: [
           MenuAnchor(
             menuChildren: [
@@ -118,7 +121,8 @@ class _BuildingPageState extends State<BuildingPage> {
                     MaterialPageRoute(
                       builder: (context) =>
                         AddRoom(
-                          building: building,
+                          buildingIdx: widget.buildingIdx,
+                          building: b,
                         )),
                   );
                 },
@@ -139,16 +143,16 @@ class _BuildingPageState extends State<BuildingPage> {
           )
         ],
       ),
-      body: ExpansionPanelListExample(floors: building.floors, buildingParent: building,)
+      body: ExpansionPanelListExample(floors: (Provider.of<AllStates>(context,listen: true)).buildings[widget.buildingIdx].floors, buildingParentIdx: widget.buildingIdx,)
     );
   }
 }
 
 class RoomGrid extends StatelessWidget{
-  const RoomGrid({super.key, required this.floor, required this.building});
+  const RoomGrid({super.key, required this.flooridx, required this.buildingIdx});
 
-  final Floor floor;
-  final Building building;
+  final int flooridx;
+  final int buildingIdx;
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +162,7 @@ class RoomGrid extends StatelessWidget{
       crossAxisCount: 2,
       childAspectRatio: (1/.3),
       children: <Widget>[
-        for ( final  (index,Room r)  in floor.rooms.indexed)
+        for ( final  (index,Room r)  in (Provider.of<AllStates>(context, listen: true)).buildings[buildingIdx].floors[flooridx].rooms.indexed)
           TextButton(
             onPressed: () {
               Navigator.push(
@@ -166,8 +170,7 @@ class RoomGrid extends StatelessWidget{
                 MaterialPageRoute(
                   builder: (context) =>
                     RoomPage(
-                      room: r,
-                      building: building ,
+                      buildingIdx: buildingIdx,
                       roomIdx: index,
                       floorIdx: r.floor,
                     )),
