@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:group3_4030/add_review.dart';
+import 'package:provider/provider.dart';
 
+import 'classes/all_state.dart';
 import 'classes/building.dart';
 import 'classes/room.dart';
 
@@ -9,9 +11,8 @@ import 'classes/room.dart';
 
 //Main Reviews Page
 class ReviewsPage extends StatefulWidget {
-  ReviewsPage({super.key, required this.buildingIdx,required this.room, required this.floorIdx, required this.roomIdx});
+  ReviewsPage({super.key, required this.buildingIdx, required this.floorIdx, required this.roomIdx});
   final int buildingIdx;
-  final Room room;
   final int roomIdx;
   final int floorIdx;
   @override
@@ -33,9 +34,9 @@ class _ReviewsPageState extends State<ReviewsPage> {
         const SizedBox(height: 22),
         Expanded(
           child:ListView.separated(
-            itemCount: widget.room.reviews.length,
+            itemCount: (Provider.of<AllStates>(context, listen: true)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].reviews.length,
             itemBuilder: (BuildContext context,index){
-              return UserReview(reviewNumber: index+1, reviewRating: widget.room.reviews[index].rating, reviewContent: widget.room.reviews[index].description);
+              return UserReview(reviewNumber: index+1, reviewRating: (Provider.of<AllStates>(context, listen: true)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].reviews[index].rating, reviewContent: (Provider.of<AllStates>(context, listen: true)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].reviews[index].description);
             },
               separatorBuilder: (context, index) {
                 return SizedBox(height: 10,);

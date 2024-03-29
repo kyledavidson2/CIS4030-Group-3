@@ -88,7 +88,7 @@ class _RoomPageState extends State<RoomPage> {
                   children: [
                     const Icon(Icons.star, color: Colors.amber, size: 28),
                     Text(
-                      "${(Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].rating}  ",
+                      "${(Provider.of<AllStates>(context, listen: true)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].rating.toStringAsFixed(2)}  ",
                       style: const TextStyle(
                         fontSize: 26,
                         //decoration: TextDecoration.underline
@@ -119,7 +119,7 @@ class _RoomPageState extends State<RoomPage> {
                   const VerticalDivider(width: 20, color: Colors.transparent),
                   TextButton.icon(
                     icon: const Icon(Icons.star),
-                    label: Text("Reviews (${(Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].numReviews})", style: const TextStyle(fontSize: 16, decoration: TextDecoration.underline)),
+                    label: Text("Reviews (${(Provider.of<AllStates>(context, listen: true)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx].numReviews})", style: const TextStyle(fontSize: 16, decoration: TextDecoration.underline)),
                     onPressed: (){
 
                       Navigator.push(
@@ -128,7 +128,6 @@ class _RoomPageState extends State<RoomPage> {
                             builder: (context) =>
                                 ReviewsPage(
                                   buildingIdx: widget.buildingIdx,
-                                  room: (Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].floors[widget.floorIdx].rooms[widget.roomIdx],
                                   roomIdx: widget.roomIdx,
                                   floorIdx: widget.floorIdx,
                                 )),

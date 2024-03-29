@@ -28,6 +28,8 @@ class _AddReviewState extends State<AddReview>{
   final descController = TextEditingController();
    Future<bool> submit() async{
      Building b = (Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx];
+     double total = 0;
+     double avg = 0;
      try {
        //handle case where there is ground floor or not
 
@@ -39,6 +41,15 @@ class _AddReviewState extends State<AddReview>{
            )
        );
        b.floors[widget.floorIdx].rooms[widget.roomIdx].numReviews = b.floors[widget.floorIdx].rooms[widget.roomIdx].reviews.length;
+
+       b.floors[widget.floorIdx].rooms[widget.roomIdx].reviews.forEach((element) {
+
+         total = total +element.rating;
+
+       });
+       avg = total/b.floors[widget.floorIdx].rooms[widget.roomIdx].numReviews;
+
+       b.floors[widget.floorIdx].rooms[widget.roomIdx].rating = avg;
 
        BuildingData bd = BuildingData();
        final response = await bd.setBuilding((Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx].id, jsonEncode(b.toJson()));

@@ -20,7 +20,22 @@ class BuildingData{
   }
 
   Future<http.Response> getBuildings() {
-    return http.get(Uri.parse('$baseUrl/getbuilding'));
+    return http.get(
+        Uri.parse('$baseUrl/getbuilding'),
+        headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',"Keep-Alive": "timeout=5, max=1"
+      },
+    );
+    // return http.post(
+    //   Uri.parse('$baseUrl/getbuilding'),
+    //   headers: <String, String>{
+    //     'Content-Type': 'application/json; charset=UTF-8',
+    //   },
+    //   body: jsonEncode(<String, String>{
+    //     'id':"0"
+    //   }),
+    // );
+
   }
 
   Future<http.Response> setBuilding(int id,String data) {
