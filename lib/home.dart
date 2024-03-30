@@ -18,7 +18,9 @@ import 'classes/NamedMarker.dart';
 
 //Main HomePage for App
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, this.building});
+
+  final Building? building;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -110,6 +112,25 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     // getCoordinates();
     //setMarker();
+    if (widget.building != null){
+      _mkrSearchResult.add(Marker(
+        markerId: MarkerId(widget.building!.id.toString()),
+        position: LatLng(widget.building!.lat, widget.building!.long),
+        infoWindow: InfoWindow(
+          title: widget.building!.name,
+          snippet: "${widget.building!.name} has new ${widget.building!.floors.length} floors",
+          onTap: () {
+            print("element id : ${widget.building!.id}");
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => BuildingPage(buildingIdx: widget.building!.id,)),
+            );
+          },
+        ),
+      ),);
+    }
   }
 
 

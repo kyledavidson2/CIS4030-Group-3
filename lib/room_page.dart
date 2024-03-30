@@ -111,7 +111,7 @@ class _RoomPageState extends State<RoomPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => HomePage()
+                            builder: (context) => HomePage(building: (Provider.of<AllStates>(context, listen: false)).buildings[widget.buildingIdx])
                         ),
                       );
                     } //go to map

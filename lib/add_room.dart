@@ -30,13 +30,14 @@ class _AddRoomState extends State<AddRoom> {
     Building b = widget.building;
     try {
       int f = int.parse(floorController.text);
+      int f2 = f;
 
       //handle case where there is ground floor or not
       if (b.firstFloor() != 0){
-        f--;
+        f2--;
       }
 
-      b.floors[f].rooms.add(
+      b.floors[f2].rooms.add(
         Room(
           name: nameController.text,
           floor: f,
