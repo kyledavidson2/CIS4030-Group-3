@@ -14,6 +14,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'add_review.dart';
 import 'classes/buildingData.dart';
+import 'classes/NamedMarker.dart';
 
 //Main HomePage for App
 class HomePage extends StatefulWidget {
@@ -101,7 +102,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
- Set<Marker> markers = {};
+ //Set<Marker> markers = {};
+ Set<NamedMarker> markers = {};
  
   @override
   void initState(){
@@ -117,24 +119,27 @@ class _HomePageState extends State<HomePage> {
     {
       if(element.abrv!= "ZAV")
       {
-        markers.add(Marker(
-          markerId: MarkerId(element.id.toString()),
-          position: LatLng(element.lat, element.long),
-          infoWindow: InfoWindow(
-            title: element.name,
-            snippet: "${element.name} has new ${element.floors.length} floors",
-            onTap: () {
-              print("element id : ${element.id}");
+        markers.add(
+          NamedMarker(
+            marker: Marker(
+              markerId: MarkerId(element.id.toString()),
+              position: LatLng(element.lat, element.long),
+              infoWindow: InfoWindow(
+                title: element.name,
+                snippet: "${element.name} has new ${element.floors.length} floors",
+                onTap: () {
+                  print("element id : ${element.id}");
 
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => BuildingPage(buildingIdx: element.id,)),
-              );
-
-            },
-          ),
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BuildingPage(buildingIdx: element.id,)),
+                  );
+                },
+              ),
+            ),
+            name: element.name,
+            abrv: element.abrv,
         ));
       }
     }
@@ -353,10 +358,9 @@ class _HomePageState extends State<HomePage> {
     });
 
     markers.forEach((marker) {
-      //it only searches based on name but it should also be able to search on abrv
-      //would need to link a building to the marker for this to work
-      if (marker.infoWindow.title!.toLowerCase().contains(text.toLowerCase())) {
-        _mkrSearchResult.add(marker);
+      if (marker.name.toLowerCase().contains(text.toLowerCase()) ||
+          marker.abrv.toLowerCase().contains(text.toLowerCase())) {
+        _mkrSearchResult.add(marker.marker);
       } 
     });
 
