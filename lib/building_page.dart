@@ -172,7 +172,8 @@ class RoomGrid extends StatelessWidget{
                     RoomPage(
                       buildingIdx: buildingIdx,
                       roomIdx: index,
-                      floorIdx: r.floor,
+                      floorIdx: ((Provider.of<AllStates>(context, listen: true)).buildings[buildingIdx].firstFloor() == 0) 
+                        ? r.floor : r.floor-1, //some buildings start at 0, others start at 1. this prevents index out of range
                     )),
               );
             }, //navigate to RoomPage(r)
