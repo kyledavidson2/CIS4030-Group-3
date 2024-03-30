@@ -14,6 +14,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'add_review.dart';
 import 'classes/buildingData.dart';
+import 'classes/NamedMarker.dart';
 
 //Main HomePage for App
 class HomePage extends StatefulWidget {
@@ -26,7 +27,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   final List<Building> _searchResult = [];
+  final Set<Marker> _mkrSearchResult = {};
   TextEditingController controller = TextEditingController();
+  MapType mapType = MapType.terrain;
 
   
   //Setting the Coordinates for the Map to focus on the campus
@@ -99,13 +102,14 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
- Set<Marker> markers = {};
+ //Set<Marker> markers = {};
+ Set<NamedMarker> markers = {};
  
   @override
   void initState(){
     super.initState();
     // getCoordinates();
-    // setMarker();
+    //setMarker();
   }
 
 
@@ -115,31 +119,34 @@ class _HomePageState extends State<HomePage> {
     {
       if(element.abrv!= "ZAV")
       {
-        markers.add(Marker(
-          markerId: MarkerId(element.id.toString()),
-          position: LatLng(element.lat, element.long),
-          infoWindow: InfoWindow(
-            title: element.name,
-            snippet: "${element.name} has new ${element.floors.length} floors",
-            onTap: () {
-              print("element id : ${element.id}");
+        markers.add(
+          NamedMarker(
+            marker: Marker(
+              markerId: MarkerId(element.id.toString()),
+              position: LatLng(element.lat, element.long),
+              infoWindow: InfoWindow(
+                title: element.name,
+                snippet: "${element.name} has new ${element.floors.length} floors",
+                onTap: () {
+                  print("element id : ${element.id}");
 
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => BuildingPage(buildingIdx: element.id,)),
-              );
-
-            },
-          ),
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BuildingPage(buildingIdx: element.id,)),
+                  );
+                },
+              ),
+            ),
+            name: element.name,
+            abrv: element.abrv,
         ));
       }
     }
   }
   @override
   Widget build(BuildContext context) {
-
+    setMarker(); //probably shouldnt be called everytime but it has to wait for the getbuildings somehow
     return GestureDetector(
       onTap: changeFocus,
       child: Scaffold(
@@ -164,36 +171,58 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         body: <Widget>[
-          Container(
-            //Google map
-            child: GoogleMap(
-              mapType: MapType.terrain,
-              initialCameraPosition: guelphCampus,
-              markers:  Set<Marker>.from((Provider.of<AllStates>(context, listen: false)).buildings.map((element) {
-                return Marker(
-                  markerId: MarkerId(element.id.toString()),
-                  position: LatLng(element.lat, element.long),
-                  infoWindow: InfoWindow(
-                    title: element.name,
-                    snippet: "${element.name} has new ${element.floors.length} floors",
-                    onTap: () {
-                      // print("element id : ${element.id}");
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BuildingPage(buildingIdx: element.id),
-                        ),
-                      );
-                    },
+          Stack(
+            children: [
+              Container(
+                //Google map
+                child: GoogleMap(
+                  mapType: mapType,
+                  initialCameraPosition: guelphCampus,
+                  markers:  _mkrSearchResult.isEmpty && controller.text.isEmpty 
+                      //Set<Marker>.from((Provider.of<AllStates>(context, listen: false)).buildings.map((element) {
+                      //  return Marker(
+                      //    markerId: MarkerId(element.id.toString()),
+                      //    position: LatLng(element.lat, element.long),
+                      //    infoWindow: InfoWindow(
+                      //      title: element.name,
+                      //      snippet: "${element.name} has new ${element.floors.length} floors",
+                      //      onTap: () {
+                      //        // print("element id : ${element.id}");
+                      //        Navigator.push(
+                      //          context,
+                      //          MaterialPageRoute(
+                      //            builder: (context) => BuildingPage(buildingIdx: element.id),
+                      //          ),
+                      //        );
+                      //      },
+                      //    ),
+                      //  );
+                      //}))
+                    ? {} //empty set when nothing searched
+                    : _mkrSearchResult //else use search result
+                ),
+              ),
+              Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 105.0,
+                      right: 7.0
+                    ),
+                    child: IconButton.filled(
+                      iconSize: 26,
+                      icon: const Icon(Icons.layers_outlined),
+                      color: const Color.fromARGB(255, 92, 92, 92),
+                      style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.white)),
+                      onPressed: (){
+                        setState(() {
+                          mapType = (mapType == MapType.terrain) ? MapType.hybrid : MapType.terrain;
+                        });
+                      },
+                    ),
                   ),
-                );
-              }))
-
-
-
-
-
-            ),
+                )
+            ]
           ),
           Padding(
             padding: const EdgeInsets.all(4.0),
@@ -315,6 +344,7 @@ class _HomePageState extends State<HomePage> {
 
   onSearchTextChanged(String text) async {
     _searchResult.clear();
+    _mkrSearchResult.clear();
     if (text.isEmpty) {
       setState(() {});
       return;
@@ -324,6 +354,13 @@ class _HomePageState extends State<HomePage> {
       if (building.name.toLowerCase().contains(text.toLowerCase()) ||
           building.abrv.toLowerCase().contains(text.toLowerCase())) {
         _searchResult.add(building);
+      } 
+    });
+
+    markers.forEach((marker) {
+      if (marker.name.toLowerCase().contains(text.toLowerCase()) ||
+          marker.abrv.toLowerCase().contains(text.toLowerCase())) {
+        _mkrSearchResult.add(marker.marker);
       } 
     });
 
